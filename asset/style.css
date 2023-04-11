@@ -1,0 +1,16 @@
+body {
+    background-color: #D9FFFF;
+}
+
+#login-page {
+    height: 100vh;
+}
+.login-box {
+    background: #FFFFFF;
+    border-radius: 20px;
+    height: 80%;
+}
+
+.login-form {
+    width : 70%;
+}
