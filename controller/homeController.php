@@ -6,5 +6,8 @@ class home extends Controller {
     function login() {
         $this->view("login");
     }
+    function mainpage() {
+        $this->view("mainpage");
+    }
 }
 ?>

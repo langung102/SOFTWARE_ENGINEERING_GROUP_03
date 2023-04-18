@@ -1,5 +1,5 @@
-<div class="flex-shrink-0 my-3 py-4 bg-white text-dark bg-opacity-50" 
-    style="width: calc(250px + 2.5%); box-sizing: border-box;">
+<div class="flex-shrink-0 py-4 bg-white text-dark " 
+    style="width: 250px; box-sizing: border-box;">
     <ul class="list-unstyled ps-0">
         <li class="nav-item fs-5 fw-bold text-primary">
             <a class="nav-link py-4" href="#">

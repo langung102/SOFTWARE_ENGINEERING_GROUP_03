@@ -19,7 +19,7 @@
 
       <!-- Start Navbar -->
       <nav class="navbar navbar-expand-md bg-white navbar-white">
-        <div class="container">
+        <div class="container-fluid">
           <!-- Logo -->
           <a href="#" class="navbar-brand fs-2 fw-semibold text-primary"> 
             <img src="../asset/img/logo_uwc.png" alt="" height="50px" width="50px">
