@@ -1,6 +1,11 @@
-<div class="flex-shrink-0 my-3 py-4 bg-white text-dark bg-opacity-50" 
-    style="width: calc(250px + 2.5%); box-sizing: border-box;">
-    <ul class="list-unstyled ps-0">
+<div class="container-fluid m-0 p-0">
+<div class="col-lg-6 m-0 p-0">
+    <p>aaa</p>
+</div>
+<div class="col-lg-3 p-0 m-0">
+ <!-- flex-shrink-0 my-3 py-4 bg-opacity-50 bg-white text-dark-->
+ <!-- style="width: calc(250px + 2.5%); box-sizing: border-box;" -->
+    <!-- <ul class="list-unstyled ps-0">
         <li class="nav-item fs-5 fw-bold text-primary">
             <a class="nav-link py-4" href="#">
                 <img src="../asset/img/leftbar1.png" style="margin-right: 15px;" alt="" height="40px" width="40px">
@@ -37,5 +42,8 @@
                 Xem phương tiện
             </a>
         </li>
-    </ul>
+    </ul> -->
+<!-- </div> -->
+<p>aa</p>
+</div>
 </div>
