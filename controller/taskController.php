@@ -1,5 +1,5 @@
 <?php
-class taskAssign extends Controller {
+class task extends Controller {
     function default() {
         $this->view("taskAssign");
     }
