@@ -1,7 +1,11 @@
 <?php
 class task extends Controller {
-    function default() {
+    function assign() {
         $this->view("taskAssign");
+    }
+    
+    function manage() {
+        $this->view("taskManage");
     }
 }
 ?>

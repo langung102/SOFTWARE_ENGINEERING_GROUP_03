@@ -2,7 +2,7 @@
     require_once("header.php");
 ?>
 
-<div class="assign container-fluid rounded">
+<div class="assign container-fluid rounded my-3">
     <div class="row">
         <div class="switch6 bg-primary" style="border:1px solid #999999;">
 			<label class="switch6-light" onclick="">
@@ -376,3 +376,6 @@
     }
 
 </script>
+<?php
+    require_once("footer.php");
+?>
