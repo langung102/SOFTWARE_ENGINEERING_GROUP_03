@@ -2,7 +2,7 @@
     require_once("header.php");
 ?>
 
-<div class="assign container-fluid rounded">
+<div class="assign container-fluid rounded my-3">
     <div class="row">
         <div class="switch6 bg-primary" style="border:1px solid #999999;">
 			<label class="switch6-light" onclick="">
@@ -63,7 +63,7 @@
     </div>
     <div class="row">
         <div class="col-4">
-            <img class="img-fluid" src="./asset/img/map.png" style="width: 450px; height: 550px;"></img>
+            <img class="img-fluid" src="../asset/img/map.png" style="width: 450px; height: 550px;"></img>   
         </div>
         <div class="col-2">
             <div class="bg-primary" style="border-radius: 10px; color: white; text-align: center; padding: 2px 2px;">
@@ -136,7 +136,7 @@
     <div class="row" style="padding-top: 5px">
         <div class="col-2">
             <button type="button" class="btn btn-primary">
-                <img src="./asset/img/arrowbutton.png" style="width: 20%; margin-left: -5px; margin-right: 10px;"></img>    
+                <img src="../asset/img/arrowbutton.png" style="width: 20%; margin-left: -5px; margin-right: 10px;"></img>    
                 Trở về
             </button>
         </div>
@@ -147,13 +147,12 @@
             </button>
             <button type="button" class="btn btn-primary">
                 Lưu
-                <img src="./asset/img/savebutton.png" style="width: 25%; margin-left: 5px; margin-bottom: 4px;"></img>    
+                <img src="../asset/img/savebutton.png" style="width: 25%; margin-left: 5px; margin-bottom: 4px;"></img>    
             </button>
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" 
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" 
-            crossorigin="anonymous">
-</script>
+<?php
+    require_once("footer.php");
+?>
