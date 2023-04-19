@@ -1,7 +1,8 @@
 <?php 
     require_once("header.php");
 ?>
-<table style="width:80% ">
+<div class="justify-content-center">
+<table style="width:70%;" class="table table-striped-columns">
 
 <tr>
     <th>Mã số</th>
@@ -28,3 +29,4 @@ $result = $data["dataVehicle"];
 }
 ?>
 </table>
+</div>
