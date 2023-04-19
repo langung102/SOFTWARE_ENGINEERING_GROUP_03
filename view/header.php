@@ -8,6 +8,8 @@
       <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
       <link rel="stylesheet" href="../asset/style.css">
+      <link rel="stylesheet" href="../asset/switch.css">
+      <link rel="stylesheet" href="../asset/assign.css">
       <title>UWC 2.0</title>
     </head>
 
@@ -19,7 +21,7 @@
 
       <!-- Start Navbar -->
       <nav class="navbar navbar-expand-md bg-white navbar-white">
-        <div class="container">
+        <div class="container-fluid mx-5">
           <!-- Logo -->
           <a href="#" class="navbar-brand fs-2 fw-semibold text-primary"> 
             <img src="../asset/img/logo_uwc.png" alt="" height="50px" width="50px">
@@ -37,19 +39,26 @@
               </li>
             </ul>
           </div>
-
           <!-- Buttons -->
           <?php
             if (isset($_SESSION['user_name'])) {
               $name = $_SESSION['name'];
               $img = "";
               echo <<< _END
-              <span class="d-grid gap-2 col-6 d-md-flex justify-content-md-end">
-                <span class="navbar-text mx-3 fs-5"><a href="/user/profile" style="text-decoration:none;"><em>$name</em></a></span>
-                <!-- Signout -->
-                <form action="/user/signout" method="POST">
-                  <button type="submit" class="btn btn-outline-danger btn-lg">Đăng xuất</button>
-                </form>
+              <span class="d-grid gap-2 col-6 d-md-flex justify-content-md-end me-3">
+                <button type="button" class="btn bg-light rounded-circle"><img src="../asset/img/notification.png" alt="" width="30px"></button>
+                <div class="dropdown">
+                  <a class="dropdown-toggle text-decoration-none" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="rounded-circle mx-2" width="50px" src="../asset/img/user.png">
+                    <span class="fs-5 fw-bold"> Back Officer </span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item fs-5" href="/task/manage">Quản lí</a></li>
+                    <li><a class="dropdown-item fs-5" href="/task/assign">Phân công công việc</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item fs-5" href="/user/signout">Đăng xuất</a></li>
+                  </ul>
+                </div>
               </span>   
               _END;
             }

@@ -1,5 +1,5 @@
     <footer>
-      <div class="d-flex p-2 flex-column flex-wrap align-content-center text-dark bg-light" >
+      <div class="d-flex p-2 flex-column flex-wrap align-content-center text-dark bg-white" >
         <div class="d-flex p-2 flex-md-row flex-column gap-3 flex-wrap align-content-center">
           <!-- ----------------------------------------------------------------------------------- -->
           <div style="padding-right: 1em;">
