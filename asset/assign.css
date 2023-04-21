@@ -2,6 +2,8 @@
     padding: 16px 0px 16px 80px;
 }
 
+#map { height: 545px; }
+
 @font-face {
     font-family: Lato-Regular;
     src: url(../fonts/Lato/Lato-Regular.ttf)

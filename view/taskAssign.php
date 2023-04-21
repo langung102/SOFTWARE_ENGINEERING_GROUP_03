@@ -5,8 +5,8 @@
 <div class="assign container-fluid rounded my-3">
     <div class="row">
         <div class="switch6 bg-primary" style="border:1px solid #999999;">
-			<label class="switch6-light" onclick="">
-				<input type="checkbox">
+			<label class="switch6-light">
+				<input id="change" type="checkbox">
 				<span>
 					<span>Collector</span>
 					<span>Janitor</span>
@@ -63,7 +63,8 @@
     </div>
     <div class="row">
         <div class="col-4">
-            <img class="img-fluid" src="../asset/img/map.png" style="width: 450px; height: 550px;"></img>
+            <!-- <img class="img-fluid" src="../asset/img/map.png" style="width: 450px; height: 550px;"></img> -->
+            <div id="map"></div>
         </div>
         <div class="col-2">
             <div class="bg-primary" style="border-radius: 10px; color: white; text-align: center; padding: 4px 2px;">
@@ -112,7 +113,7 @@
                                     <tr class="row100 body">
                                     <td class="cell100 column1">
                                         <button type="button" class="btn btn-primary" onclick="selected1(this)">
-                                        '.$i.'
+                                        '.$data["route"]["id"].'
                                         </button>
                                     </td>
                                     </tr>';
@@ -204,10 +205,10 @@
                             <div class="table100-body js-pscroll" style="max-height: 440px;">
                             <table id="tablemain">
                             <tbody id="tablemainbody">
-                                <tr id="row row1">
+                                <tr id="row1">
                                     <td id="cell1" class="border" onclick="selectCell1(this)" style="cursor: pointer;"><br></td>
-                                    <td id="cell2" class="border" onclick="selectCell2(this)" style="cursor: pointer;"><br></td>
-                                    <td id="cell3" class="border" onclick="selectCell3(this)" style="cursor: pointer;"><br></td>
+                                    <td id="cell2" class="border" onclick ="" style="cursor: pointer;"><br></td>
+                                    <td id="cell3" class="border" onclick ="" style="cursor: pointer;"><br></td>
                                     <td id="cell4" class="border" onclick="selectCell4(this)" style="cursor: pointer;">
                                         <img src="../asset/img/trashbin.png" onclick="deleteRow(this)" style="margin-left: 16px;  max-width: 40%;"></img>
                                     </td>
@@ -240,11 +241,6 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" 
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" 
-            crossorigin="anonymous">
-</script>
-
 <script>
     var curCell1 = "";
     var curCell2 = "";
@@ -252,7 +248,34 @@
     var curRow = 0;
     var numRow = 1;
     var flagAddRow = 0;
-    var tmp = "";
+
+    var map = L.map('map').setView([10.884408, 106.806318], 13);
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var polygon = L.polygon([
+        [[10.87169135362013, 106.77058391383869],
+[10.87337715284553, 106.77106671146055],
+[10.87493650864648, 106.76918916515334],
+[10.87660121732765, 106.76645331196285],
+[10.873566804662193, 106.76535897068666]]
+    ]).addTo(map);
+
+    var bounds = polygon.getBounds()
+    map.fitBounds(bounds)
+    var center = bounds.getCenter()
+    map.panTo(center)
+
+
+    // L.Routing.control({
+    //     waypoints: [
+    //         L.latLng(10.840859077354168, 106.69524804835847),
+    //         L.latLng(10.80885499246943, 106.67674127040907)
+    //     ],
+    //     routeWhileDragging: true
+    // }).addTo(map);
 
     function clearAllColorCell() {
         var table = document.getElementById("tablemain");
@@ -273,6 +296,7 @@
         curRow = row;
     }
     function selectCell2(cell) {
+        var row = cell.parentNode;
         clearAllColorCell();
         cell.style.backgroundColor = "#dbdbdb";
         document.getElementById("blank").style.display = "none";
@@ -282,6 +306,7 @@
         curRow = row;
     }
     function selectCell3(cell) {
+        var row = cell.parentNode;
         clearAllColorCell();
         cell.style.backgroundColor = "#dbdbdb";
         document.getElementById("blank").style.display = "none";
@@ -307,8 +332,9 @@
         row.parentNode.removeChild(row);
     }
     function selected1(button) {
+        curRow.childNodes[3].setAttribute("onclick", "selectCell2(this)");
         if (curRow.childNodes[1].innerHTML != "<br>") {
-            tmp = 
+            var tmp = 
             `<tr class="row100 body">
             <td class="cell100 column1">
             <button type="button" class="btn btn-primary" onclick="selected1(this)">
@@ -316,16 +342,21 @@
             </button>
             </td>
             </tr> `;
-        }
-        var row = button.closest("tr");
-        curRow.childNodes[1].innerHTML = button.textContent;
-        row.parentNode.removeChild(row);
-        if (tmp != "")
+            var row = button.closest("tr");
+            curRow.childNodes[1].innerHTML = button.textContent;
+            row.parentNode.removeChild(row);
             document.getElementById("table1body").innerHTML += tmp;
+        } else {
+            var row = button.closest("tr");
+            curRow.childNodes[1].innerHTML = button.textContent;
+            row.parentNode.removeChild(row);
+        }
+
     }
     function selected2(button) {
+        curRow.childNodes[5].setAttribute("onclick", "selectCell3(this)");
         if (curRow.childNodes[3].innerHTML != "<br>") {
-            tmp = 
+            var tmp = 
             `<tr class="row100 body">
             <td class="cell100 column1">
             <button type="button" class="btn btn-primary" onclick="selected2(this)">
@@ -333,17 +364,19 @@
             </button>
             </td>
             </tr> `;
-        }
-        var row = button.closest("tr");
-        curRow.childNodes[3].innerHTML = button.textContent;
-        row.parentNode.removeChild(row);
-        if (tmp != "")
+            var row = button.closest("tr");
+            curRow.childNodes[3].innerHTML = button.textContent;
+            row.parentNode.removeChild(row);
             document.getElementById("table2body").innerHTML += tmp;
-        flagAddRow = 1;
+        } else {
+            var row = button.closest("tr");
+            curRow.childNodes[3].innerHTML = button.textContent;
+            row.parentNode.removeChild(row);
+        }
     }
     function selected3(button) {
         if (curRow.childNodes[5].innerHTML != "<br>") {
-            tmp = 
+            var tmp = 
             `<tr class="row100 body">
             <td class="cell100 column1">
             <button type="button" class="btn btn-primary" onclick="selected3(this)">
@@ -351,31 +384,29 @@
             </button>
             </td>
             </tr> `;
-        }
-        var row = button.closest("tr");
-        curRow.childNodes[5].innerHTML = button.textContent;
-        row.parentNode.removeChild(row);
-        if (tmp != "")
+            var row = button.closest("tr");
+            curRow.childNodes[5].innerHTML = button.textContent;
+            row.parentNode.removeChild(row);
             document.getElementById("table3body").innerHTML += tmp;
-            
-        if (flagAddRow) {
-            document.getElementById("tablemainbody").innerHTML += `
-            <tr id="row row`+ numRow + `">
+        } else {
+            var row = button.closest("tr");
+            curRow.childNodes[5].innerHTML = button.textContent;
+            row.parentNode.removeChild(row);
+        }
+        if (curRow.getAttribute("id") == "row" + numRow && document.getElementById("row" + numRow).childNodes[1].textContent != "" && document.getElementById("row" + numRow).childNodes[3].textContent != "" && document.getElementById("row" + numRow).childNodes[5].textContent != "") {
+            numRow += 1;
+            var tableBody = document.getElementById("tablemainbody");
+            var newRow = document.createElement("tr");
+            newRow.setAttribute("id", "row" + numRow);
+            newRow.innerHTML = `
                 <td id="cell1" class="border" onclick="selectCell1(this)" style="cursor: pointer;"><br></td>
-                <td id="cell2" class="border" onclick="selectCell2(this)" style="cursor: pointer;"><br></td>
-                <td id="cell3" class="border" onclick="selectCell3(this)" style="cursor: pointer;"><br></td>
+                <td id="cell2" class="border" onclick ="" style="cursor: pointer;"><br></td>
+                <td id="cell3" class="border" onclick ="" style="cursor: pointer;"><br></td>
                 <td id="cell4" class="border" onclick="selectCell4(this)" style="cursor: pointer;">
                     <img src="../asset/img/trashbin.png" onclick="deleteRow(this)" style="margin-left: 16px;  max-width: 40%;"></img>
                 </td>
-            </tr>
-            `
-            numRow += 1;
-            flagAddRow = 0;
+            `;
+            tableBody.appendChild(newRow);
         }
-
     }
-
 </script>
-<?php
-    require_once("footer.php");
-?>
