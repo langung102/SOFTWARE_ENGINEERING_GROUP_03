@@ -37,5 +37,5 @@
                 Xem phương tiện
             </a>
         </li>
-    </ul>
+    </ul> 
 </div>
