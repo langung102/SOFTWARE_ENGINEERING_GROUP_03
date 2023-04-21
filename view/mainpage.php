@@ -16,16 +16,15 @@
           <div class="row text-start justify-content-around pb-2">  
             <div class="col-4 p-0">
               Nhân viên
-              
             </div>
             <div class="col-4">
             </div>
           </div>  
           <div class="row justify-content-around pb-5">
-            <div class="col-4 bg-light p-3 border border-info rounded-2">
+            <div class="col-4 bg-white p-3 border border-info rounded-2">
               Collector
             </div>
-            <div class="col-4 bg-light p-3 border border-info rounded-2">
+            <div class="col-4 bg-white p-3 border border-info rounded-2">
               Janitor
             </div>
             </div>
@@ -38,10 +37,10 @@
             </div>
           </div>
           <div class="row justify-content-around pb-5">
-            <div class="col-4 bg-light p-3 border border-info rounded-2">
+            <div class="col-4 bg-white p-3 border border-info rounded-2">
               Vehicles
             </div>
-            <div class="col-4 bg-light p-3 border border-info rounded-2">
+            <div class="col-4 bg-white p-3 border border-info rounded-2">
               Trollers
             </div>
             </div>
@@ -54,10 +53,10 @@
             </div>
           </div>
           <div class="row justify-content-around">
-            <div class="col-4 bg-light p-3 border border-info rounded-2">
+            <div class="col-4 bg-white p-3 border border-info rounded-2">
               MCP
             </div>
-            <div class="col-4 bg-light p-3 border border-info rounded-2">
+            <div class="col-4 bg-white p-3 border border-info rounded-2">
               Routes
             </div>
           </div>
