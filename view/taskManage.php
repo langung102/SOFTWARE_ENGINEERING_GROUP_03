@@ -12,7 +12,7 @@
         <!-- filter -->
         <div class="d-flex">
             <div class="p-2 dropdown">
-                <button class="btn btn-secondary dropdown-toggle bg-light text-black border-primary btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:150px;">
+                <button class="btn btn-secondary dropdown-toggle bg-light text-black border-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:150px;">
                     Tuần 
                 </button>
                 <ul class="dropdown-menu">
@@ -22,7 +22,7 @@
                 </ul>
             </div>
             <div class="p-2 dropdown">
-                <button class="btn btn-secondary dropdown-toggle bg-light text-black border-primary btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:150px;">
+                <button class="btn btn-secondary dropdown-toggle bg-light text-black border-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:150px;">
                     Mã số 
                 </button>
                 <ul class="dropdown-menu">
@@ -35,51 +35,42 @@
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-primary" type="submit">
-                        <img src="../asset/img/search.png" alt="" width="30px">
+                        <img src="../asset/img/search.png" alt="" width="20px">
                     </button>
                 </form>
             </div>
         </div>
-        <!-- table -->
-        <table class="table table-striped mt-3 fs-5">
+        <table class="table table-responsive table-responsive-sm">
             <thead>
                 <tr class="fw-bold">
-                    <th scope="col">Tuần</th>
-                    <th scope="col">Mã số</th>
-                    <th scope="col">Tên</th>
-                    <th scope="col">Khu vực</th>
-                    <th scope="col">Troller</th>
-                    <th scope="col">Route</th>
-                    <th scope="col">Vehicle</th>
+                    <th scope="row">Tuần</th>
+                    <th scope="row">Mã số</th>
+                    <th scope="row">Tên</th>
+                    <th scope="row">Khu vực</th>
+                    <th scope="row">Troller</th>
+                    <th scope="row">Route</th>
+                    <th scope="row">Vehicle</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>3</th>
-                    <th>Contact</th>
-                    <th>Nguyen Phuc Khang</th>
-                    <th>Country</th>
-                    <th>Country</th>
-                    <th>Country</th>
-                    <th>Country</th>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Francisco Chang</td>
-                    <td>Mexico</td>
-                </tr>
+                <?php  
+                    foreach ($data['result'] as $val) {
+                        echo "<tr><td></td><td>".$val['id_task']."</td>".
+                        "<td>".$val['id_employee']."</td>".
+                        "<td>".$val['assigned_area']."</td>".
+                        "<td>".$val['assigned_troller']."</td>".
+                        "<td>".$val['assigned_route']."</td>".
+                        "<td>".$val['assigned_vehicle']."</td></tr>"; 
+                    }
+                ?>  
             </tbody>
         </table>
+
         <!-- add task -->
         <div class="d-flex flex-grow-1 align-items-end justify-content-end">
             <a href="/task/assign">
                 <button type="button" class="btn btn-primary rounded-circle p-3 mb-2">
-                    <img src="../asset/img/add_task.png" alt="" width="70px">
+                    <img src="../asset/img/add_task.png" alt="" width="50px">
                 </button>
             </a>
         </div>

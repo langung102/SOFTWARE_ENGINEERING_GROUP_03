@@ -2,7 +2,7 @@ body {
     background-color: #D9FFFF;
 }
 .page-body{
-    height: 80vh;
+    min-height: 100vh;
     position: relative;
 }
 .login-box {
@@ -20,13 +20,14 @@ body {
     background: #F5F5F5;
     border: 1px solid #EB0000;
 }
-.page-body{
-    height: 100vh;
-    position: relative;
-}
 .left-bar {
     position: absolute;
     top: 0;
-    left: 0;
+    left: -25px;
     bottom: 0;
+}
+
+
+.text-nowrap {
+    white-space: nowrap;
 }
