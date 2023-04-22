@@ -1,11 +1,10 @@
+
 <?php 
-    class taskModel extends Database{
-        function taskAssign(){
+    class taskModel extends Database {
+        function getAllTask() {
             $sql = "SELECT * FROM task";
             $result = $this->conn->query($sql);
-            if($result && $result->num_rows > 0){
-                return $result;
-            }
+            return $result;
         }
     }
 ?>
