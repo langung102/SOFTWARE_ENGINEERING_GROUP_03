@@ -8,7 +8,7 @@
         ?>
     </div>
     <div class="d-flex flex-column mb-3 col-8 my-5 me-5 ">
-    <div class="d-flex flex-grow-1 align-items-end justify-content-end">
+    <div class="align-items-end justify-content-end">
     <div class="p-2 dropdown">
                 <button class="btn btn-secondary dropdown-toggle bg-light text-black border-primary 
                 btn-lg align-items-end justify-content-end" type="button" data-bs-toggle="dropdown" 
