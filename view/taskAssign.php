@@ -62,7 +62,7 @@
 
     </div>
     <div class="row">
-        <div class="col-4">
+        <div class="mymap col-4">
             <!-- <img class="img-fluid" src="../asset/img/map.png" style="width: 450px; height: 550px;"></img> -->
             <div id="map"></div>
         </div>
@@ -108,12 +108,12 @@
                             <table id="table1">
                             <tbody id="table1body">
                             <?php
-                                for ($i = 1; $i <= 20; $i++) {
+                                while ($result = $data["route"]->fetch_assoc()) {
                                     echo '
                                     <tr class="row100 body">
                                     <td class="cell100 column1">
-                                        <button type="button" class="btn btn-primary" onclick="selected1(this)">
-                                        '.$data["route"]["id"].'
+                                        <button idroute="'.$result["id_route"].'" waypoint="'.$result["waypoint"].'" title="'.$result["way"].'" type="button" class="btn btn-primary" onclick="selected1(this)">
+                                        '.$result["id_route"].'
                                         </button>
                                     </td>
                                     </tr>';
@@ -137,15 +137,16 @@
                             <table id="table2">
                             <tbody id="table2body">
                             <?php
-                                for ($i = 1; $i <= 20; $i++) {
-                                    echo '
-                                    <tr class="row100 body">
-                                    <td class="cell100 column1">
-                                        <button type="button" class="btn btn-primary" onclick="selected2(this)">
-                                        collector'.$i.'
-                                        </button>
-                                    </td>
-                                    </tr>';
+                                while ($result = $data["employee"]->fetch_assoc()) {
+                                    if ($result["position"] == "collector")
+                                        echo '
+                                        <tr class="row100 body">
+                                        <td class="cell100 column1">
+                                            <button type="button" class="btn btn-primary" onclick="selected2(this)">
+                                            '.$result["name"].'
+                                            </button>
+                                        </td>
+                                        </tr>';
                                 }
                             ?>
                             </tbody>
@@ -166,15 +167,16 @@
                             <table id="table3">
                             <tbody id="table3body">
                             <?php
-                                for ($i = 1; $i <= 20; $i++) {
-                                    echo '
-                                    <tr class="row100 body">
-                                    <td class="cell100 column1">
-                                        <button type="button" class="btn btn-primary" onclick="selected3(this)">
-                                        vehicle'.$i.'
-                                        </button>
-                                    </td>
-                                    </tr>';
+                                while ($result = $data["vehicle"]->fetch_assoc()) {
+                                    if ($result["type"] == "Vehicle_Collector")
+                                        echo '
+                                        <tr class="row100 body">
+                                        <td class="cell100 column1">
+                                            <button type="button" class="btn btn-primary" onclick="selected3(this)">
+                                            '.$result["name"].'
+                                            </button>
+                                        </td>
+                                        </tr>';
                                 }
                             ?>
                             </tbody>
@@ -207,9 +209,9 @@
                             <tbody id="tablemainbody">
                                 <tr id="row1">
                                     <td id="cell1" class="border" onclick="selectCell1(this)" style="cursor: pointer;"><br></td>
-                                    <td id="cell2" class="border" onclick ="" style="cursor: pointer;"><br></td>
-                                    <td id="cell3" class="border" onclick ="" style="cursor: pointer;"><br></td>
-                                    <td id="cell4" class="border" onclick="selectCell4(this)" style="cursor: pointer;">
+                                    <td id="cell2" class="border" onclick ="setRouteColor(this)" style="cursor: pointer;"><br></td>
+                                    <td id="cell3" class="border" onclick ="setRouteColor(this)" style="cursor: pointer;"><br></td>
+                                    <td id="cell4" class="border" onclick="" style="cursor: pointer;">
                                         <img src="../asset/img/trashbin.png" onclick="deleteRow(this)" style="margin-left: 16px;  max-width: 40%;"></img>
                                     </td>
                                 </tr>
@@ -245,9 +247,14 @@
     var curCell1 = "";
     var curCell2 = "";
     var curCell3 = "";
-    var curRow = 0;
+    var curRow = null;
+    var curRoute;
     var numRow = 1;
     var flagAddRow = 0;
+    var lastButton;
+    var flagDelete = 0;
+    var lastRow = null;
+    const lastRoute = new Array(100).fill(null);
 
     var map = L.map('map').setView([10.884408, 106.806318], 13);
 
@@ -255,13 +262,13 @@
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    var polygon = L.polygon([
-        [[10.87169135362013, 106.77058391383869],
-[10.87337715284553, 106.77106671146055],
-[10.87493650864648, 106.76918916515334],
-[10.87660121732765, 106.76645331196285],
-[10.873566804662193, 106.76535897068666]]
-    ]).addTo(map);
+//     var polygon = L.polygon([
+//         [[10.87169135362013, 106.77058391383869],
+// [10.87337715284553, 106.77106671146055],
+// [10.87493650864648, 106.76918916515334],
+// [10.87660121732765, 106.76645331196285],
+// [10.873566804662193, 106.76535897068666]]
+//     ]).addTo(map);
 
     var bounds = polygon.getBounds()
     map.fitBounds(bounds)
@@ -285,8 +292,54 @@
         }
     }
 
+    function zoomRoute(row) {
+        var cell = row.childNodes[1];
+        if (cell.innerHTML != "<br>") {
+            map.removeControl(lastRoute[cell.getAttribute("idroute")]);
+                lastRoute[cell.getAttribute("idroute")] = L.Routing.control({
+                        waypoints: lastRoute[cell.getAttribute("idroute")].getWaypoints(),
+                        routeWhileDragging: true,
+                        lineOptions: {
+                            styles: [{color: 'green'}]
+                        }
+            }).addTo(map);
+            var latLngString = cell.getAttribute("waypoint");
+            var latLngArray = eval(latLngString);
+            var firstLat = parseFloat(latLngArray[0].lat.toFixed(6));
+            var firstLng = parseFloat(latLngArray[0].lng.toFixed(6));
+            var secondLat = parseFloat(latLngArray[1].lat.toFixed(6));
+            var secondLng = parseFloat(latLngArray[1].lng.toFixed(6));
+
+            var southWest = L.latLng(firstLat, firstLng);
+            northEast = L.latLng(secondLat, secondLng);
+            bounds = L.latLngBounds(southWest, northEast);
+            map.fitBounds(bounds);
+        }
+    }
+
+    function setRouteColor(row) {
+        if (row.childNodes[1].innerHTML != "<br>") {
+            if (curRow != row && curRow != null) {
+                map.removeControl(lastRoute[curRow.childNodes[1].getAttribute("idroute")]);
+                lastRoute[curRow.childNodes[1].getAttribute("idroute")] = L.Routing.control({
+                        waypoints: lastRoute[curRow.childNodes[1].getAttribute("idroute")].getWaypoints(),
+                        routeWhileDragging: true,
+                        lineOptions: {
+                            styles: [{color: 'red'}]
+                        },
+                        fitSelectedRoutes: false
+                }).addTo(map);
+            }
+        }
+        zoomRoute(row);
+    }
+
     function selectCell1(cell) {
+        if (cell.innerHTML == "<br>") {
+            lastRow = curRow;
+        }
         var row = cell.parentNode;
+        setRouteColor(row);
         clearAllColorCell();
         cell.style.backgroundColor = "#dbdbdb";
         document.getElementById("blank").style.display = "none";
@@ -294,9 +347,11 @@
         document.getElementById("collector").style.display = "none";
         document.getElementById("vehicle").style.display = "none";
         curRow = row;
+        curRoute = cell.getAttribute("idroute");
     }
     function selectCell2(cell) {
         var row = cell.parentNode;
+        setRouteColor(row);
         clearAllColorCell();
         cell.style.backgroundColor = "#dbdbdb";
         document.getElementById("blank").style.display = "none";
@@ -304,9 +359,11 @@
         document.getElementById("collector").style.display = "";
         document.getElementById("vehicle").style.display = "none";
         curRow = row;
+        curRoute = cell.getAttribute("idroute");
     }
     function selectCell3(cell) {
         var row = cell.parentNode;
+        setRouteColor(row);
         clearAllColorCell();
         cell.style.backgroundColor = "#dbdbdb";
         document.getElementById("blank").style.display = "none";
@@ -314,9 +371,11 @@
         document.getElementById("collector").style.display = "none";
         document.getElementById("vehicle").style.display = "";
         curRow = row;
+        curRoute = cell.getAttribute("idroute");
     }
     function deleteRow(icon) {
         var cell = icon.parentNode;
+        selectCell1(cell);
         var row = cell.parentNode;
         var contentCount = 0;
         for (var i = 0; i < row.cells.length - 1; i++) {
@@ -325,19 +384,90 @@
             contentCount++;
         }
         }
-        if (contentCount <= 2) {
-        // Row does not have three cells with content, no need to delete
-        return;
+
+        map.removeControl(lastRoute[row.childNodes[1].getAttribute("idroute")]);
+
+        var tmp1 = 
+            `<tr class="row100 body">
+            <td class="cell100 column1">
+            <button idroute="` + row.childNodes[1].getAttribute("idroute") + `" waypoint="` + row.childNodes[1].getAttribute("waypoint") + `" title="` + row.childNodes[1].getAttribute("title") + `" type="button" class="btn btn-primary" onclick="selected1(this)">
+            ` + row.childNodes[1].textContent + `
+            </button>
+            </td>
+            </tr> `;
+        document.getElementById("table1body").innerHTML += tmp1;
+
+        if (row.childNodes[3].textContent != "") {
+            var tmp2 = 
+            `<tr class="row100 body">
+            <td class="cell100 column1">
+            <button type="button" class="btn btn-primary" onclick="selected2(this)">
+            ` + row.childNodes[3].textContent + `
+            </button>
+            </td>   
+            </tr> `;
+            document.getElementById("table2body").innerHTML += tmp2;
         }
+
+        if (row.childNodes[5].textContent != "") {
+            var tmp3 = 
+            `<tr class="row100 body">
+            <td class="cell100 column1">
+            <button type="button" class="btn btn-primary" onclick="selected3(this)">
+            ` + row.childNodes[5].textContent + `
+            </button>
+            </td>
+            </tr> `;
+            document.getElementById("table3body").innerHTML += tmp3;
+        }
+
+        var flag = 0;
+        if (row == document.getElementById("tablemainbody").lastChild)
+            flag = 1;
         row.parentNode.removeChild(row);
+        if (numRow > 0)
+            numRow--;
+
+        if (numRow == 0 || flag == 1) {
+            numRow++;
+            var tableBody = document.getElementById("tablemainbody");
+            var newRow = document.createElement("tr");
+            newRow.setAttribute("id", "row" + 1);
+            newRow.innerHTML = `
+                <td id="cell1" class="border" onclick="selectCell1(this)" style="cursor: pointer;"><br></td>
+                <td id="cell2" class="border" onclick ="" style="cursor: pointer;"><br></td>
+                <td id="cell3" class="border" onclick ="" style="cursor: pointer;"><br></td>
+                <td id="cell4" class="border" onclick="" style="cursor: pointer;">
+                    <img src="../asset/img/trashbin.png" onclick="deleteRow(this)" style="margin-left: 16px;  max-width: 40%;"></img>
+                </td>
+            `;
+            tableBody.appendChild(newRow);
+        }
+        
+        curRow = null;
+        flagDelete = 1;
+
     }
     function selected1(button) {
         curRow.childNodes[3].setAttribute("onclick", "selectCell2(this)");
+        if (lastRow != null && lastRow.childNodes[1].innerHTML != "<br>" && lastRoute[lastRow.childNodes[1].getAttribute("idroute")] != null && flagDelete == 0) {
+            map.removeControl(lastRoute[lastRow.childNodes[1].getAttribute("idroute")]);
+            lastRoute[lastRow.childNodes[1].getAttribute("idroute")] = L.Routing.control({
+                    waypoints: lastRoute[lastRow.childNodes[1].getAttribute("idroute")].getWaypoints(),
+                    routeWhileDragging: true,
+                    lineOptions: {
+                        styles: [{color: 'red'}]
+                    },
+                    fitSelectedRoutes: false
+            }).addTo(map);
+        }
+        flagDelete = 0;
         if (curRow.childNodes[1].innerHTML != "<br>") {
+            map.removeControl(lastRoute[curRow.childNodes[1].getAttribute("idroute")]);
             var tmp = 
             `<tr class="row100 body">
             <td class="cell100 column1">
-            <button type="button" class="btn btn-primary" onclick="selected1(this)">
+            <button idroute="` + curRow.childNodes[1].getAttribute("idroute") + `" waypoint="` + curRow.childNodes[1].getAttribute("waypoint") + `" title="` + curRow.childNodes[1].getAttribute("title") + `" type="button" class="btn btn-primary" onclick="selected1(this)">
             ` + curRow.childNodes[1].textContent + `
             </button>
             </td>
@@ -346,12 +476,35 @@
             curRow.childNodes[1].innerHTML = button.textContent;
             row.parentNode.removeChild(row);
             document.getElementById("table1body").innerHTML += tmp;
+            curRow.childNodes[1].setAttribute("waypoint", button.getAttribute("waypoint"));
+            curRow.childNodes[1].setAttribute("idroute", button.getAttribute("idroute"));
         } else {
             var row = button.closest("tr");
             curRow.childNodes[1].innerHTML = button.textContent;
+            curRow.childNodes[1].setAttribute("waypoint", button.getAttribute("waypoint"));
+            curRow.childNodes[1].setAttribute("idroute", button.getAttribute("idroute"));
             row.parentNode.removeChild(row);
         }
+        lastRoute[button.getAttribute("idroute")] = L.Routing.control({
+                waypoints: eval(button.getAttribute("waypoint")),
+                routeWhileDragging: true,
+                lineOptions: {
+                    styles: [{color: 'green'}]
+                }
+        }).addTo(map);
+        var latLngString = button.getAttribute("waypoint");
+        var latLngArray = eval(latLngString);
+        var firstLat = parseFloat(latLngArray[0].lat.toFixed(6));
+        var firstLng = parseFloat(latLngArray[0].lng.toFixed(6));
+        var secondLat = parseFloat(latLngArray[1].lat.toFixed(6));
+        var secondLng = parseFloat(latLngArray[1].lng.toFixed(6));
 
+        var southWest = L.latLng(firstLat, firstLng);
+        northEast = L.latLng(secondLat, secondLng);
+        bounds = L.latLngBounds(southWest, northEast);
+        map.fitBounds(bounds);
+        
+        lastButton = button;
     }
     function selected2(button) {
         curRow.childNodes[5].setAttribute("onclick", "selectCell3(this)");
@@ -368,10 +521,12 @@
             curRow.childNodes[3].innerHTML = button.textContent;
             row.parentNode.removeChild(row);
             document.getElementById("table2body").innerHTML += tmp;
+            lastButton= button;
         } else {
             var row = button.closest("tr");
             curRow.childNodes[3].innerHTML = button.textContent;
             row.parentNode.removeChild(row);
+            lastButton = button;
         }
     }
     function selected3(button) {
@@ -388,12 +543,12 @@
             curRow.childNodes[5].innerHTML = button.textContent;
             row.parentNode.removeChild(row);
             document.getElementById("table3body").innerHTML += tmp;
+            lastButton = button;
         } else {
             var row = button.closest("tr");
             curRow.childNodes[5].innerHTML = button.textContent;
             row.parentNode.removeChild(row);
-        }
-        if (curRow.getAttribute("id") == "row" + numRow && document.getElementById("row" + numRow).childNodes[1].textContent != "" && document.getElementById("row" + numRow).childNodes[3].textContent != "" && document.getElementById("row" + numRow).childNodes[5].textContent != "") {
+            lastButton = button;
             numRow += 1;
             var tableBody = document.getElementById("tablemainbody");
             var newRow = document.createElement("tr");
@@ -402,7 +557,7 @@
                 <td id="cell1" class="border" onclick="selectCell1(this)" style="cursor: pointer;"><br></td>
                 <td id="cell2" class="border" onclick ="" style="cursor: pointer;"><br></td>
                 <td id="cell3" class="border" onclick ="" style="cursor: pointer;"><br></td>
-                <td id="cell4" class="border" onclick="selectCell4(this)" style="cursor: pointer;">
+                <td id="cell4" class="border" onclick="" style="cursor: pointer;">
                     <img src="../asset/img/trashbin.png" onclick="deleteRow(this)" style="margin-left: 16px;  max-width: 40%;"></img>
                 </td>
             `;

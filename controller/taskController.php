@@ -1,15 +1,15 @@
 <?php
 class task extends Controller {
     function assign() {
-        // $route = $this->model("route");
-        // // $collector = $this->model("collector");
-        // $vehicle = $this->model("vehicle");
+        $route = $this->model("routeModel");
+        $employee = $this->model("employeeModel");
+        $vehicle = $this->model("vehicleModel");
 
-        // $allRoute = $route->getAllRoute();
-        // $allVehicle = $vehicle->Vehicle();
+        $allRoute = $route->getAllRoute();
+        $allEmployee = $employee->getAllEmployee();
+        $allVehicle = $vehicle->Vehicle();
 
-        // $this->view("taskAssign", ["route" => $allRoute, "vehicle" => $allVehicle,]);
-        $this->view("taskAssign");
+        $this->view("taskAssign", ["route" => $allRoute, "employee" => $allEmployee, "vehicle" => $allVehicle]);
     }
     
     function manage() {

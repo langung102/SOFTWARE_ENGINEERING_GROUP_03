@@ -1,7 +1,7 @@
-<?php 
-    class vehicleModel extends Database{
-        function Vehicle(){
-            $sql = "SELECT * FROM vehicle";
+<?php
+    class employeeModel extends Database {
+        function getAllEmployee() {
+            $sql = "SELECT * FROM employee";
             $result = $this->conn->query($sql);
             if($result && $result->num_rows > 0){
                 return $result;
