@@ -51,40 +51,24 @@
                     <th scope="row">Troller</th>
                     <th scope="row">Route</th>
                     <th scope="row">Vehicle</th>
-                    <th scope="row">Trạng thái</th>
                 </tr>
             </thead>
             <tbody>
-                <?php  
-                    foreach ($data['result'] as $val) {
-                        $x=$val['state'];
-                        $work = ($x==0)?"../asset/img/delete.png":(($x==1)?"../asset/img/clock.png":"../asset/img/work-in-progress.png");
-                        echo "<tr><td></td><td>".$val['id_task']."</td>".
-                        "<td>".$val['id_employee']."</td>".
-                        "<td>".$val['assigned_area']."</td>".
-                        "<td>".$val['assigned_troller']."</td>".
-                        "<td>".$val['assigned_route']."</td>".
-                        "<td>".$val['assigned_vehicle']."</td>".
-                        "<td class='text-center'><img src=$work style='width:auto; height:20px;'></td>
-                        </tr>"; 
+                <?php
+                    if (isset($data['result'])) {
+                        foreach ($data['result'] as $val) {
+                            echo "<tr><td></td><td>".$val['id_task']."</td>".
+                            "<td>".$val['id_employee']."</td>".
+                            "<td>".$val['assigned_area']."</td>".
+                            "<td>".$val['assigned_troller']."</td>".
+                            "<td>".$val['assigned_route']."</td>".
+                            "<td>".$val['assigned_vehicle']."</td></tr>"; 
+                        }
                     }
+                    else echo "<p class='text-center fs-6 fst-italic'>".$data['msg']."</p>";
                 ?>  
             </tbody>
         </table>
-        <div class="container">
-            <div class="d-flex flex-row mb-3">
-                <div class="p-2" style="width:50px; height:25px"> <img src= "../asset/img/delete.png" style="width:auto; height:20px;"></div>
-                <div class="d-flex align-items-center p-2">Chưa hoàn thành</div>
-            </div>
-            <div class="d-flex flex-row mb-3">
-                <div class="p-2" style="width:50px; height:25px"> <img src= "../asset/img/clock.png" style="width:auto; height:20px;"></div>
-                <div class="d-flex align-items-center p-2">Đang hoàn thành</div>
-            </div>
-            <div class="d-flex flex-row mb-3">
-                <div class="p-2" style="width:50px; height:25px"> <img src= "../asset/img/work-in-progress.png" style="width:auto; height:20px;"></div>
-                <div class="d-flex align-items-center p-2">Đã hoàn thành</div>
-            </div>
-        </div>
 
         <!-- add task -->
         <div class="d-flex flex-grow-1 align-items-end justify-content-end">

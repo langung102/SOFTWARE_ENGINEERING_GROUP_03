@@ -1,7 +1,7 @@
 <div class=" left-bar flex-shrink-0 px-5 pt-3 bg-white text-dark" style="box-sizing: border-box;">
     <ul class="list-unstyled ps-0">
         <li class="nav-item fs-6 fw-bold text-primary">
-            <a class="nav-link py-4" href="">
+            <a class="nav-link py-4" href="#">
                 <img src="../asset/img/leftbar1.png" style="margin-right: 15px;" alt="" width="30px">
                 Bảng điều khiển
             </a>
