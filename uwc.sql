@@ -109,30 +109,32 @@ CREATE TABLE `mcp` (
   `id_mcp` int(11) UNSIGNED NOT NULL,
   `max_capacity` float UNSIGNED NOT NULL,
   `current_capacity` float UNSIGNED NOT NULL,
-  `location` text DEFAULT NULL
+  `location` text DEFAULT NULL, 
+  `my_area` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `mcp`
 --
 
-INSERT INTO `mcp` (`id_mcp`, `max_capacity`, `current_capacity`, `location`) VALUES
-(1, 600, 580, 'Đường Tạ Quang Bửu, khu phố 6, phường Linh Trung, thành phố Thủ Đức, thành phố Hồ Chí Minh'),
-(2, 700, 500, 'Đường Tô Vĩnh Diện, phường Đông Hòa, thị xã Dĩ An, tỉnh Bình Dương'),
-(3, 550, 492, '669 QL1A, khu phố 3, thành phố Thủ Đức, thành phố Hồ Chí Minh'),
-(4, 575, 410, 'VQ8Q+W5W, phường Linh Trung, thành phố Thủ Đức, thành phố Hồ Chí Minh'),
-(5, 750, 609, '120 Xa lộ Hà Nội, thành phố Thủ Đức, thành phố Hồ Chí Minh'),
-(6, 500, 340, 'VR93+JH4, Cổng C Trường ĐH Công nghệ thông tin, khu phố 6, thành phố Thủ Đức, thành phố Hồ Chí Minh'),
-(7, 650, 470, 'Khu Công nghệ cao TPHCM, quận 9, thành phố Hồ Chí Minh'),
-(8, 800, 560, 'Cầu vượt Linh Xuân, phường Linh Xuân, thành phố Thủ Đức, thành phố Hồ Chí Minh'),
-(9, 850, 812, 'Chợ Thủ Đức, đường Võ Văn Ngân, Trường Thọ, thành phố Thủ Đức, Thành phố Hồ Chí Minh'),
-(10, 750, 632, 'Ngã ba đường số 14, phường Linh Trung, thành phố Thủ Đức, thành phố Hồ Chí Minh'),
-(11, 575, 550, '69 Ấp Tân Lập, phường Đông Hòa, thị xã Dĩ An, Bình Dương'),
-(12, 650, 419, 'Cổng Nhà văn hóa Sinh viên, đường Lưu Hữu Phước, phường Đông Hòa, thị xã Dĩ An, tỉnh Bình Dương'),
-(13, 575, 420, 'Ngã ba Đường T1, phường Đông Hòa, thị xã Dĩ An, tỉnh Bình Dương\r\n '),
-(14, 650, 525, 'Đường Alexander De Rhodes, phường Linh Trung, thành phố Thủ Đức, thành phố Hồ Chí Minh'),
-(15, 900, 872, 'Ngã tư Thủ Đức, phường Linh Trung, thành phố Thủ Đức, thành phố Hồ Chí Minh'),
-(16, 675, 525, 'Cổng kí túc xá khu B, phường Đông Hòa, thị xã Dĩ An, tỉnh Bình Dương');
+INSERT INTO `mcp` (`id_mcp`, `max_capacity`, `current_capacity`, `location`,`my_area`) VALUES
+(1, 600, 580, 'Đường Tạ Quang Bửu, khu phố 6, phường Linh Trung, thành phố Thủ Đức, thành phố Hồ Chí Minh', 1),
+(2, 700, 500, 'Đường Tô Vĩnh Diện, phường Đông Hòa, thị xã Dĩ An, tỉnh Bình Dương', 1),
+(3, 550, 492, '669 QL1A, khu phố 3, thành phố Thủ Đức, thành phố Hồ Chí Minh', 1),
+(4, 575, 410, 'VQ8Q+W5W, phường Linh Trung, thành phố Thủ Đức, thành phố Hồ Chí Minh', 1),
+(5, 750, 609, '120 Xa lộ Hà Nội, thành phố Thủ Đức, thành phố Hồ Chí Minh', 2),
+(6, 500, 340, 'VR93+JH4, Cổng C Trường ĐH Công nghệ thông tin, khu phố 6, thành phố Thủ Đức, thành phố Hồ Chí Minh', 2),
+(7, 650, 470, 'Khu Công nghệ cao TPHCM, quận 9, thành phố Hồ Chí Minh', 2),
+(8, 800, 560, 'Cầu vượt Linh Xuân, phường Linh Xuân, thành phố Thủ Đức, thành phố Hồ Chí Minh', 2),
+(9, 850, 812, 'Chợ Thủ Đức, đường Võ Văn Ngân, Trường Thọ, thành phố Thủ Đức, Thành phố Hồ Chí Minh', 2),
+(10, 750, 632, 'Ngã ba đường số 14, phường Linh Trung, thành phố Thủ Đức, thành phố Hồ Chí Minh', 3),
+(11, 575, 550, '69 Ấp Tân Lập, phường Đông Hòa, thị xã Dĩ An, Bình Dương', 3),
+(12, 650, 419, 'Cổng Nhà văn hóa Sinh viên, đường Lưu Hữu Phước, phường Đông Hòa, thị xã Dĩ An, tỉnh Bình Dương', 3),
+(13, 575, 420, 'Ngã ba Đường T1, phường Đông Hòa, thị xã Dĩ An, tỉnh Bình Dương\r\n', 3),
+(14, 650, 525, 'Đường Alexander De Rhodes, phường Linh Trung, thành phố Thủ Đức, thành phố Hồ Chí Minh', 4),
+(15, 900, 872, 'Ngã tư Thủ Đức, phường Linh Trung, thành phố Thủ Đức, thành phố Hồ Chí Minh', 4),
+(16, 675, 525, 'Cổng kí túc xá khu B, phường Đông Hòa, thị xã Dĩ An, tỉnh Bình Dương', 4);
+
 
 -- --------------------------------------------------------
 
@@ -174,9 +176,14 @@ CREATE TABLE `task` (
   `assigned_area` text DEFAULT NULL,
   `assigned_troller` text DEFAULT NULL,
   `assigned_route` text DEFAULT NULL,
-  `assigned_vehicle` text DEFAULT NULL
+  `assigned_vehicle` text DEFAULT NULL,
+  `state` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+ 
+ INSERT INTO `task` (`id_task`, `description`, `id_employee`, `assigned_area`, `assigned_troller`, `assigned_route`, `assigned_vehicle`, `state` ) VALUES
+(1, 'aa', 2010444, 'Thủ Đức', 'T1', 'Tạ Quang Bửu', '62-F1 05678', 1),
+(2, 'aa', 2010444, 'Thủ Đức', 'T1', 'Tạ Quang Bửu', '62-F1 05678', 0),
+(3, 'aa', 2010444, 'Thủ Đức', 'T1', 'Tạ Quang Bửu', '62-F1 05678', 2);
 -- --------------------------------------------------------
 
 --
