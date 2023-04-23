@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2023 at 01:49 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Apr 23, 2023 at 03:47 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `area` (
   `list_MCP` text DEFAULT NULL,
   `location` text DEFAULT NULL,
   `polygon` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `area`
@@ -69,7 +69,7 @@ CREATE TABLE `calendar` (
   `id_calendar` int(10) UNSIGNED NOT NULL,
   `id_owner` int(10) UNSIGNED NOT NULL,
   `list_task` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -86,18 +86,20 @@ CREATE TABLE `employee` (
   `position` varchar(15) DEFAULT NULL,
   `gender` varchar(5) DEFAULT NULL,
   `user_name` varchar(20) DEFAULT NULL,
-  `password` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `password` varchar(15) DEFAULT NULL,
+  `state` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`id`, `name`, `address`, `mail`, `phone_number`, `position`, `gender`, `user_name`, `password`) VALUES
-(10000, 'Nguyen Van A', 'Thủ Đức, Hồ Chí Minh City', 'nguyenvana@gmail.com', '0912345678', 'collector', 'male', 'nguyenvana', '1234556789'),
-(10001, 'Nguyen Van B', 'Quận 2, Hồ Chí Minh City', 'nguyenvanb@gmail.com', '0912345678', 'collector', 'male', 'nguyenvanb', '1234556789'),
-(10002, 'Nguyen Van C', 'Quận 2, Hồ Chí Minh City', 'nguyenvanc@gmail.com', '0912345678', 'collector', 'male', 'nguyenvanc', '1234556789'),
-(20000, 'Dang Van A', 'Thủ Đức, Hồ Chí Minh City', 'dangvana@gmail.com', '0912345678', 'janitor', 'male', 'dangvana', '1234556789');
+INSERT INTO `employee` (`id`, `name`, `address`, `mail`, `phone_number`, `position`, `gender`, `user_name`, `password`, `state`) VALUES
+(10000, 'Nguyen Van A', 'Thủ Đức, Hồ Chí Minh City', 'nguyenvana@gmail.com', '0912345678', 'collector', 'male', 'nguyenvana', '1234556789', 0),
+(10001, 'Nguyen Van B', 'Quận 2, Hồ Chí Minh City', 'nguyenvanb@gmail.com', '0912345678', 'collector', 'male', 'nguyenvanb', '1234556789', 0),
+(10002, 'Nguyen Van C', 'Quận 2, Hồ Chí Minh City', 'nguyenvanc@gmail.com', '0912345678', 'collector', 'male', 'nguyenvanc', '1234556789', 0),
+(20000, 'Dang Van A', 'Thủ Đức, Hồ Chí Minh City', 'dangvana@gmail.com', '0912345678', 'janitor', 'male', 'dangvana', '1234556789', 0),
+(20001, 'Back Officer', 'DHBK TPHCM', 'backofficer@gmail.com', '0988888888', 'backofficer', 'male', 'backofficer', '123456', 0);
 
 -- --------------------------------------------------------
 
@@ -109,15 +111,15 @@ CREATE TABLE `mcp` (
   `id_mcp` int(11) UNSIGNED NOT NULL,
   `max_capacity` float UNSIGNED NOT NULL,
   `current_capacity` float UNSIGNED NOT NULL,
-  `location` text DEFAULT NULL, 
+  `location` text DEFAULT NULL,
   `my_area` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mcp`
 --
 
-INSERT INTO `mcp` (`id_mcp`, `max_capacity`, `current_capacity`, `location`,`my_area`) VALUES
+INSERT INTO `mcp` (`id_mcp`, `max_capacity`, `current_capacity`, `location`, `my_area`) VALUES
 (1, 600, 580, 'Đường Tạ Quang Bửu, khu phố 6, phường Linh Trung, thành phố Thủ Đức, thành phố Hồ Chí Minh', 1),
 (2, 700, 500, 'Đường Tô Vĩnh Diện, phường Đông Hòa, thị xã Dĩ An, tỉnh Bình Dương', 1),
 (3, 550, 492, '669 QL1A, khu phố 3, thành phố Thủ Đức, thành phố Hồ Chí Minh', 1),
@@ -135,7 +137,6 @@ INSERT INTO `mcp` (`id_mcp`, `max_capacity`, `current_capacity`, `location`,`my_
 (15, 900, 872, 'Ngã tư Thủ Đức, phường Linh Trung, thành phố Thủ Đức, thành phố Hồ Chí Minh', 4),
 (16, 675, 525, 'Cổng kí túc xá khu B, phường Đông Hòa, thị xã Dĩ An, tỉnh Bình Dương', 4);
 
-
 -- --------------------------------------------------------
 
 --
@@ -145,23 +146,24 @@ INSERT INTO `mcp` (`id_mcp`, `max_capacity`, `current_capacity`, `location`,`my_
 CREATE TABLE `route` (
   `id_route` int(10) UNSIGNED NOT NULL,
   `way` text DEFAULT NULL,
-  `waypoint` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `waypoint` text NOT NULL,
+  `state` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `route`
 --
 
-INSERT INTO `route` (`id_route`, `way`, `waypoint`) VALUES
-(1, 'Ấp Tân Lập -> KTX Khu A -> Nhà văn hóa sinh viên -> Đại học KHTN TPHCM -> Quảng trường sáng tạo', '[L.latLng(10.882594865215857, 106.80902742582217),\r\nL.latLng(10.876074971984783, 106.80121937633339)]\r\n'),
-(2, 'Alexander De Rhodes -> QL1A -> Cầu vượt Linh Xuân', '[L.latLng(10.869228389293657, 106.79782491125269),\r\nL.latLng(10.872467253043297, 106.76731533823641)]'),
-(3, 'Nhà văn hóa sinh viên -> đường Tô Vĩnh Diện -> KTX khu B -> Trường Đại học Kinh Tế - Luật TPHCM', '[L.latLng(10.875473699558114, 106.79987972386236),\r\nL.latLng(10.870452107703636, 106.7781953940562)]'),
-(4, 'Ngã ba 621 -> Xa lộ Hà Nội -> Ngã tư Thủ Đức -> Suối Tiên ', '[L.latLng(10.850539279140307, 106.76082042778457),\r\nL.latLng(10.866128998169652, 106.80295195905508)]'),
-(5, 'Xa lộ Hà Nội -> Chợ Thủ Đức -> đường Lê Văn Chí -> đường Hoàng Diệu 2 -> đường 14 ', '[L.latLng(10.850298024721607, 106.75424524370949),\r\nL.latLng(10.856475762930279, 106.76603052289222)]'),
-(6, 'Công Ty Xử Lý Chất Thải Công Nghiệp & Môi Trường Thái An -> Đường Vườn Lài -> Quốc lộ 1 -> Bãi Rác Tam Bình', '[L.latLng(10.840859077354168, 106.69524804835847),\r\nL.latLng(10.86069263393587, 106.74183107228262)]'),
-(7, 'Công Ty Xử Lý Chất Thải Công Nghiệp & Môi Trường Thái An -> Đường Vườn Lài -> Nguyễn Thái Sơn -> Bãi rác Phú Nhuận', '[L.latLng(10.840859077354168, 106.69524804835847),\r\nL.latLng(10.80885499246943, 106.67674127040907)]\r\n'),
-(8, 'Công Ty Xử Lý Chất Thải Công Nghiệp & Môi Trường Thái An -> Quốc lộ 1 -> Nguyễn Thị Kiểu -> Bãi rác Phường Hiệp Thành', '[L.latLng(10.840859077354168, 106.69524804835847),\r\nL.latLng(10.873237725641323, 106.63553054414089)]'),
-(9, 'Công Ty Xử Lý Chất Thải Công Nghiệp & Môi Trường Thái An -> Đường Vườn Lài -> Đường Quang Trung -> Bãi rác gần Phạm Văn Chiêu', '[L.latLng(10.840859077354168, 106.69524804835847),\r\nL.latLng(10.851631888835035, 106.64938937803355)]');
+INSERT INTO `route` (`id_route`, `way`, `waypoint`, `state`) VALUES
+(1, 'Ấp Tân Lập -> KTX Khu A -> Nhà văn hóa sinh viên -> Đại học KHTN TPHCM -> Quảng trường sáng tạo', '[L.latLng(10.882594865215857, 106.80902742582217),\r\nL.latLng(10.876074971984783, 106.80121937633339)]\r\n', 0),
+(2, 'Alexander De Rhodes -> QL1A -> Cầu vượt Linh Xuân', '[L.latLng(10.869228389293657, 106.79782491125269),\r\nL.latLng(10.872467253043297, 106.76731533823641)]', 0),
+(3, 'Nhà văn hóa sinh viên -> đường Tô Vĩnh Diện -> KTX khu B -> Trường Đại học Kinh Tế - Luật TPHCM', '[L.latLng(10.875473699558114, 106.79987972386236),\r\nL.latLng(10.870452107703636, 106.7781953940562)]', 0),
+(4, 'Ngã ba 621 -> Xa lộ Hà Nội -> Ngã tư Thủ Đức -> Suối Tiên ', '[L.latLng(10.850539279140307, 106.76082042778457),\r\nL.latLng(10.866128998169652, 106.80295195905508)]', 0),
+(5, 'Xa lộ Hà Nội -> Chợ Thủ Đức -> đường Lê Văn Chí -> đường Hoàng Diệu 2 -> đường 14 ', '[L.latLng(10.850298024721607, 106.75424524370949),\r\nL.latLng(10.856475762930279, 106.76603052289222)]', 0),
+(6, 'Công Ty Xử Lý Chất Thải Công Nghiệp & Môi Trường Thái An -> Đường Vườn Lài -> Quốc lộ 1 -> Bãi Rác Tam Bình', '[L.latLng(10.840859077354168, 106.69524804835847),\r\nL.latLng(10.86069263393587, 106.74183107228262)]', 0),
+(7, 'Công Ty Xử Lý Chất Thải Công Nghiệp & Môi Trường Thái An -> Đường Vườn Lài -> Nguyễn Thái Sơn -> Bãi rác Phú Nhuận', '[L.latLng(10.840859077354168, 106.69524804835847),\r\nL.latLng(10.80885499246943, 106.67674127040907)]\r\n', 0),
+(8, 'Công Ty Xử Lý Chất Thải Công Nghiệp & Môi Trường Thái An -> Quốc lộ 1 -> Nguyễn Thị Kiểu -> Bãi rác Phường Hiệp Thành', '[L.latLng(10.840859077354168, 106.69524804835847),\r\nL.latLng(10.873237725641323, 106.63553054414089)]', 0),
+(9, 'Công Ty Xử Lý Chất Thải Công Nghiệp & Môi Trường Thái An -> Đường Vườn Lài -> Đường Quang Trung -> Bãi rác gần Phạm Văn Chiêu', '[L.latLng(10.840859077354168, 106.69524804835847),\r\nL.latLng(10.851631888835035, 106.64938937803355)]', 0);
 
 -- --------------------------------------------------------
 
@@ -177,13 +179,21 @@ CREATE TABLE `task` (
   `assigned_troller` text DEFAULT NULL,
   `assigned_route` text DEFAULT NULL,
   `assigned_vehicle` text DEFAULT NULL,
-  `state` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
- 
- INSERT INTO `task` (`id_task`, `description`, `id_employee`, `assigned_area`, `assigned_troller`, `assigned_route`, `assigned_vehicle`, `state` ) VALUES
-(1, 'aa', 2010444, 'Thủ Đức', 'T1', 'Tạ Quang Bửu', '62-F1 05678', 1),
-(2, 'aa', 2010444, 'Thủ Đức', 'T1', 'Tạ Quang Bửu', '62-F1 05678', 0),
-(3, 'aa', 2010444, 'Thủ Đức', 'T1', 'Tạ Quang Bửu', '62-F1 05678', 2);
+  `state` int(10) UNSIGNED NOT NULL,
+  `week` int(100) NOT NULL,
+  `day` int(100) NOT NULL,
+  `time` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `task`
+--
+
+INSERT INTO `task` (`id_task`, `description`, `id_employee`, `assigned_area`, `assigned_troller`, `assigned_route`, `assigned_vehicle`, `state`, `week`, `day`, `time`) VALUES
+(1, 'aa', 2010444, 'Thủ Đức', 'T1', 'Tạ Quang Bửu', '62-F1 05678', 1, 0, 0, 0),
+(2, 'aa', 2010444, 'Thủ Đức', 'T1', 'Tạ Quang Bửu', '62-F1 05678', 0, 0, 0, 0),
+(3, 'aa', 2010444, 'Thủ Đức', 'T1', 'Tạ Quang Bửu', '62-F1 05678', 2, 0, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -197,36 +207,37 @@ CREATE TABLE `vehicle` (
   `driver` text DEFAULT NULL,
   `type` text DEFAULT NULL,
   `weight` float UNSIGNED NOT NULL,
-  `fuel_consumption` float UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `fuel_consumption` float UNSIGNED NOT NULL,
+  `state` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vehicle`
 --
 
-INSERT INTO `vehicle` (`id_vehicle`, `name`, `capacity`, `driver`, `type`, `weight`, `fuel_consumption`) VALUES
-(1, '51-D 123.45', 4300, NULL, 'Vehicle_Collector', 6000, 0),
-(2, '51-D 345.12', 4000, NULL, 'Vehicle_Collector', 5800, 0),
-(3, '51-D 124.56', 5000, NULL, 'Vehicle_Collector', 6850, 0),
-(4, '51-D 156.98', 4550, NULL, 'Vehicle_Collector', 6100, 0),
-(5, '51-D 345.56', 4200, NULL, 'Vehicle_Collector', 5900, 0),
-(6, '51-D 982.22', 4950, NULL, 'Vehicle_Collector', 6500, 0),
-(7, '51-D 183.44', 4800, NULL, 'Vehicle_Collector', 6050, 0),
-(8, '51-D 927.45', 4700, NULL, 'Vehicle_Collector', 6000, 0),
-(9, '51-D 245.44', 5200, NULL, 'Vehicle_Collector', 6350, 0),
-(10, '51-D 369.35', 4500, NULL, 'Vehicle_Collector', 6050, 0),
-(11, 'UWC-T1', 350, NULL, 'Troller', 0, 0),
-(12, 'UWC-T2', 450, NULL, 'Troller', 0, 0),
-(13, 'UWC-T3', 400, NULL, 'Troller', 0, 0),
-(14, 'UWC-T4', 400, NULL, 'Troller', 0, 0),
-(15, 'UWC-T5', 300, NULL, 'Troller', 0, 0),
-(16, 'UWC-T6', 550, NULL, 'Troller', 0, 0),
-(17, 'UWC-T7', 400, NULL, 'Troller', 0, 0),
-(18, 'UWC-T8', 250, NULL, 'Troller', 0, 0),
-(19, 'UWC-T9', 300, NULL, 'Troller', 0, 0),
-(20, 'UWC-T10', 500, NULL, 'Troller', 0, 0),
-(21, 'UWC-T11', 250, NULL, 'Troller', 0, 0),
-(22, 'UWC-T12', 325, NULL, 'Troller', 0, 0);
+INSERT INTO `vehicle` (`id_vehicle`, `name`, `capacity`, `driver`, `type`, `weight`, `fuel_consumption`, `state`) VALUES
+(1, '51-D 123.45', 4300, NULL, 'Vehicle_Collector', 6000, 0, 0),
+(2, '51-D 345.12', 4000, NULL, 'Vehicle_Collector', 5800, 0, 0),
+(3, '51-D 124.56', 5000, NULL, 'Vehicle_Collector', 6850, 0, 0),
+(4, '51-D 156.98', 4550, NULL, 'Vehicle_Collector', 6100, 0, 0),
+(5, '51-D 345.56', 4200, NULL, 'Vehicle_Collector', 5900, 0, 0),
+(6, '51-D 982.22', 4950, NULL, 'Vehicle_Collector', 6500, 0, 0),
+(7, '51-D 183.44', 4800, NULL, 'Vehicle_Collector', 6050, 0, 0),
+(8, '51-D 927.45', 4700, NULL, 'Vehicle_Collector', 6000, 0, 0),
+(9, '51-D 245.44', 5200, NULL, 'Vehicle_Collector', 6350, 0, 0),
+(10, '51-D 369.35', 4500, NULL, 'Vehicle_Collector', 6050, 0, 0),
+(11, 'UWC-T1', 350, NULL, 'Troller', 0, 0, 0),
+(12, 'UWC-T2', 450, NULL, 'Troller', 0, 0, 0),
+(13, 'UWC-T3', 400, NULL, 'Troller', 0, 0, 0),
+(14, 'UWC-T4', 400, NULL, 'Troller', 0, 0, 0),
+(15, 'UWC-T5', 300, NULL, 'Troller', 0, 0, 0),
+(16, 'UWC-T6', 550, NULL, 'Troller', 0, 0, 0),
+(17, 'UWC-T7', 400, NULL, 'Troller', 0, 0, 0),
+(18, 'UWC-T8', 250, NULL, 'Troller', 0, 0, 0),
+(19, 'UWC-T9', 300, NULL, 'Troller', 0, 0, 0),
+(20, 'UWC-T10', 500, NULL, 'Troller', 0, 0, 0),
+(21, 'UWC-T11', 250, NULL, 'Troller', 0, 0, 0),
+(22, 'UWC-T12', 325, NULL, 'Troller', 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -294,7 +305,7 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20001;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20002;
 
 --
 -- AUTO_INCREMENT for table `mcp`
@@ -312,7 +323,7 @@ ALTER TABLE `route`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `id_task` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_task` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
