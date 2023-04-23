@@ -5,6 +5,11 @@ body {
     min-height: 100vh;
     position: relative;
 }
+
+#login-page {
+    height: 100vh;
+}
+
 .login-box {
     background: #FFFFFF;
     border-radius: 20px;
@@ -27,7 +32,14 @@ body {
     bottom: 0;
 }
 
-
 .text-nowrap {
     white-space: nowrap;
+}
+
+.dau {
+    float: left;
+}
+
+.cuoi {
+    float: right;
 }
