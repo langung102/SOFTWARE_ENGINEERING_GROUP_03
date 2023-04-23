@@ -6,6 +6,10 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+      <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+      <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+      <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
       <link rel="stylesheet" href="../asset/style.css">
       <link rel="stylesheet" href="../asset/switch.css">
       <link rel="stylesheet" href="../asset/assign.css">
@@ -64,7 +68,6 @@
                 <!-- Login/Signup Modal -->
                 <span class="d-grid gap-2 col-6 d-md-flex justify-content-md-end">
                   <a href="/home/login" class= "btn btn-outline-primary col-3"> Đăng nhập </a>
-                  <button type="button" class="btn btn-primary col-3"> Đăng kí </button>
                 </span>   
               _END;
             }
