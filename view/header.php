@@ -10,6 +10,7 @@
       <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
       <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
       <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
       <link rel="stylesheet" href="../asset/style.css">
       <link rel="stylesheet" href="../asset/switch.css">
       <link rel="stylesheet" href="../asset/assign.css">
@@ -68,7 +69,6 @@
                 <!-- Login/Signup Modal -->
                 <span class="d-grid gap-2 col-6 d-md-flex justify-content-md-end">
                   <a href="/home/login" class= "btn btn-outline-primary col-3"> Đăng nhập </a>
-                  <button type="button" class="btn btn-primary col-3"> Đăng kí </button>
                 </span>   
               _END;
             }

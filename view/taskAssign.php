@@ -3,397 +3,401 @@
 ?>
 
 <div class="assign container-fluid rounded my-3">
-    <div class="row">
-        <div class="switch6 bg-primary" style="border:1px solid #999999;">
-			<label class="switch6-light">
-				<input id="state" type="checkbox" onclick="updateState(this)">
-				<span>
-					<span>Collector</span>
-					<span>Janitor</span>
-			    </span>
-					<a class="btn btn-light"></a>
-				</label>
-			</div>
+    <form  method="POST">
+        <div class="row">
+            <div class="switch6 bg-primary" style="border:1px solid #999999;">
+                <label class="switch6-light">
+                    <input id="state" type="checkbox" onclick="updateState(this)">
+                    <span>
+                        <span>Collector</span>
+                        <span>Janitor</span>
+                    </span>
+                        <a class="btn btn-light"></a>
+                    </label>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-7"></div>
+            <div class="col-5">
+                <div class="row" style="padding-bottom: 10px; margin-left: 40px">
+                <div class="col-3">
+                    <select class="form-select" name="week" required>
+                        <option value="">Tuần</option>
+                        <option value="1">Tuần 1</option>
+                        <option value="2">Tuần 2</option>
+                        <option value="3">Tuần 3</option>
+                        <option value="4">Tuần 4</option>
+                        <option value="5">Tuần 5</option>
+                        <option value="6">Tuần 6</option>
+                        <option value="7">Tuần 7</option>
+                        <option value="8">Tuần 8</option>
+                        <option value="9">Tuần 9</option>
+                        <option value="10">Tuần 10</option>
+                    </select>
+                </div>
+
+                <div class="col-3">
+                    <select class="form-select" name="day" required>
+                        <option value="">Thứ</option>
+                        <option value="2">Thứ 2</option>
+                        <option value="3">Thứ 3</option>
+                        <option value="4">Thứ 4</option>
+                        <option value="5">Thứ 5</option>
+                        <option value="6">Thứ 6</option>
+                        <option value="7">Thứ 7</option>
+                        <option value="8">Chủ nhật</option>
+                    </select>
+                </div>
+
+                <div class="col-3">
+                    <select class="form-select" name="time" required>
+                        <option value="">Buổi</option>
+                        <option value="1">Buổi 1</option>
+                        <option value="2">Buổi 2</option>
+                        <option value="3">Buổi 3</option>
+                    </select>
+                </div>
+                </div>
+            </div>
         </div>
-    <div class="row">
-        <div class="col-7"></div>
-        <div class="col-5">
-            <div class="row" style="padding-bottom: 10px; margin-left: 40px">
-            <div class="col-3">
-                <div class="dropdown1">
-                    <button class="btn btn-secondary dropdown-toggle bg-light text-black border-primary" style="min-width: 100px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Tuần
-                    </button>
-                    <ul class="dropdown-menu">
-                    <?php
-                        for ($i = 1; $i <= 20; $i++) {
-                            echo '<li><a href="#">Week ' . $i . '</a></li>';
-                        }
-                    ?>
-                    </ul>
-                </div>
+        <div class="row">
+            <div class="mymap col-4">
+                    <!-- <img class="img-fluid" src="../asset/img/map.png" style="width: 450px; height: 550px;"></img> -->
+                    <div id="map"></div>
             </div>
-
-            <div class="col-3">
-                <div class="dropdown2">
-                    <button class="btn btn-secondary dropdown-toggle bg-light text-black border-primary" style="min-width: 100px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Ngày
-                    </button>
-                    <ul class="dropdown-menu">
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-3">
-                <div class="dropdown3">
-                    <button class="btn btn-secondary dropdown-toggle bg-light text-black border-primary" style="min-width: 100px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Buổi
-                    </button>
-                    <ul class="dropdown-menu">
-                    </ul>
-                </div>
-            </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="mymap col-4">
-                <!-- <img class="img-fluid" src="../asset/img/map.png" style="width: 450px; height: 550px;"></img> -->
-                <div id="map"></div>
-        </div>
-            <div class="collectortable col-2">
-                <div class="bg-primary" style="border-radius: 10px; color: white; text-align: center; padding: 4px 2px;">
-                    Chưa phân công
-                </div>
-                <div id="blank" class="container-table100" style="min-width: 270px">
-                    <div class="wrap-table100">
-                        <div class="table100 ver1 m-b-110">
-                            <div class="table100-head">
-                                <table class="border">
-                                </table>
-                                </div>
-                                <div class="table100-body js-pscroll">
-                                <table id="table0">
-                                <tbody id="table0body">
-                                <?php
-                                    for ($i = 1; $i <= 5; $i++) {
-                                        echo '
-                                        <tr class="row100 body">
-                                        <td class="cell100 column1">
-
-                                        </td>
-                                        </tr>';
-                                    }
-                                ?>
-                                </tbody>
-                                </table>
-                            </div>
-                        </div>
+                <div class="collectortable col-2">
+                    <div class="bg-primary" style="border-radius: 10px; color: white; text-align: center; padding: 4px 2px;">
+                        Chưa phân công
                     </div>
-                </div>
-
-                <div id="route" class="container-table100" style="display: none; min-width: 270px">
-                    <div id="subroute" class="wrap-table100">
-                        <div class="table100 ver1 m-b-110">
-                            <div class="table100-head">
-                                <table class="border">
-                                </table>
-                                </div>
-                                <div class="table100-body js-pscroll">
-                                <table id="table1">
-                                <tbody id="table1body">
-                                <?php
-                                    while ($result = $data["route"]->fetch_assoc()) {
-                                        echo '
-                                        <tr class="row100 body">
-                                        <td class="cell100 column1">
-                                            <button idroute="'.$result["id_route"].'" waypoint="'.$result["waypoint"].'" title="'.$result["way"].'" type="button" class="btn btn-primary" onclick="selected1(this)">
-                                            '.$result["id_route"].'
-                                            </button>
-                                        </td>
-                                        </tr>';
-                                    }
-                                ?>
-                                </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="collector" class="container-table100" style="display: none; min-width: 270px">
-                    <div class="wrap-table100">
-                        <div class="table100 ver1 m-b-110">
-                            <div class="table100-head">
-                                <table class="border">
-                                </table>
-                                </div>
-                                <div class="table100-body js-pscroll">
-                                <table id="table2">
-                                <tbody id="table2body">
-                                <?php
-                                    while ($result = $data["employee"]->fetch_assoc()) {
-                                        if ($result["position"] == "collector")
+                    <div id="blank" class="container-table100" style="min-width: 270px">
+                        <div class="wrap-table100">
+                            <div class="table100 ver1 m-b-110">
+                                <div class="table100-head">
+                                    <table class="border">
+                                    </table>
+                                    </div>
+                                    <div class="table100-body js-pscroll">
+                                    <table id="table0">
+                                    <tbody id="table0body">
+                                    <?php
+                                        for ($i = 1; $i <= 5; $i++) {
                                             echo '
                                             <tr class="row100 body">
                                             <td class="cell100 column1">
-                                                <button type="button" class="btn btn-primary" onclick="selected2(this)">
-                                                '.$result["name"].'
-                                                </button>
+
                                             </td>
                                             </tr>';
-                                    }
-                                ?>
-                                </tbody>
-                                </table>
+                                        }
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div id="vehicle_collector" class="container-table100" style="display: none; min-width: 270px">
-                    <div class="wrap-table100">
-                        <div class="table100 ver1 m-b-110">
-                            <div class="table100-head">
-                                <table class="border">
-                                </table>
-                                </div>
-                                <div class="table100-body js-pscroll">
-                                <table id="table3">
-                                <tbody id="table3body">
-                                <?php
-                                    while ($result = $data["vehicle"]->fetch_assoc()) {
-                                        if ($result["type"] == "Vehicle_Collector")
+                    <div id="route" class="container-table100" style="display: none; min-width: 270px">
+                        <div id="subroute" class="wrap-table100">
+                            <div class="table100 ver1 m-b-110">
+                                <div class="table100-head">
+                                    <table class="border">
+                                    </table>
+                                    </div>
+                                    <div class="table100-body js-pscroll">
+                                    <table id="table1">
+                                    <tbody id="table1body">
+                                    <?php
+                                        while ($result = $data["route"]->fetch_assoc()) {
                                             echo '
                                             <tr class="row100 body">
                                             <td class="cell100 column1">
-                                                <button type="button" class="btn btn-primary" onclick="selected3(this)">
-                                                '.$result["name"].'
+                                                <button idroute="'.$result["id_route"].'" waypoint="'.$result["waypoint"].'" title="'.$result["way"].'" type="button" class="btn btn-primary" onclick="selected1(this)">
+                                                '.$result["id_route"].'
                                                 </button>
                                             </td>
                                             </tr>';
-                                    }
-                                ?>
-                                </tbody>
-                                </table>
+                                        }
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="collector" class="container-table100" style="display: none; min-width: 270px">
+                        <div class="wrap-table100">
+                            <div class="table100 ver1 m-b-110">
+                                <div class="table100-head">
+                                    <table class="border">
+                                    </table>
+                                    </div>
+                                    <div class="table100-body js-pscroll">
+                                    <table id="table2">
+                                    <tbody id="table2body">
+                                    <?php
+                                        while ($result = $data["employee"]->fetch_assoc()) {
+                                            if ($result["position"] == "collector")
+                                                echo '
+                                                <tr class="row100 body">
+                                                <td class="cell100 column1">
+                                                    <button type="button" class="btn btn-primary" onclick="selected2(this)">
+                                                    '.$result["name"].'
+                                                    </button>
+                                                </td>
+                                                </tr>';
+                                        }
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="vehicle_collector" class="container-table100" style="display: none; min-width: 270px">
+                        <div class="wrap-table100">
+                            <div class="table100 ver1 m-b-110">
+                                <div class="table100-head">
+                                    <table class="border">
+                                    </table>
+                                    </div>
+                                    <div class="table100-body js-pscroll">
+                                    <table id="table3">
+                                    <tbody id="table3body">
+                                    <?php
+                                        while ($result = $data["vehicle"]->fetch_assoc()) {
+                                            if ($result["type"] == "Vehicle_Collector")
+                                                echo '
+                                                <tr class="row100 body">
+                                                <td class="cell100 column1">
+                                                    <button type="button" class="btn btn-primary" onclick="selected3(this)">
+                                                    '.$result["name"].'
+                                                    </button>
+                                                </td>
+                                                </tr>';
+                                        }
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="collectortable col-6">
-                <div class="bg-primary" style="border-radius: 10px; color: white; text-align: center; padding: 4px 2px; max-width: 650px;">
-                    Đã được phân công
-                </div>
-                <div class="container-table100">
-                    <div class="wrap-table100">
-                        <div class="table100 ver1 m-b-110" style="padding-top: 60px">
-                            <div class="table100-head">
-                                <table class="order">
-                                <thead>
-                                <tr class="row100 head bg-light">
-                                <th class="cell100 column1 text-primary">Tuyến đường</th>
-                                <th class="cell100 column2 text-primary">Collector</th>
-                                <th class="cell100 column3 text-primary">Phương tiện</th>
-                                </tr>
-                                </thead>
-                                </table>
-                                </div>
-                                <div class="table100-body js-pscroll" style="max-height: 440px;">
-                                <table id="tablemain">
-                                <tbody id="tablemainbody">
-                                    <tr id="row1">
-                                        <td id="cell1" class="border" onclick="selectCell1(this)" style="cursor: pointer;"><br></td>
-                                        <td id="cell2" class="border" onclick ="setRouteColor(this)" style="cursor: pointer;"><br></td>
-                                        <td id="cell3" class="border" onclick ="setRouteColor(this)" style="cursor: pointer;"><br></td>
-                                        <td id="cell4" class="border" onclick="" style="cursor: pointer;">
-                                            <img src="../asset/img/trashbin.png" onclick="deleteRow(this)" style="margin-left: 16px;  max-width: 40%;"></img>
-                                        </td>
+                <div class="collectortable col-6">
+                    <div class="bg-primary" style="border-radius: 10px; color: white; text-align: center; padding: 4px 2px; max-width: 650px;">
+                        Đã được phân công
+                    </div>
+                    <div class="container-table100">
+                        <div class="wrap-table100">
+                            <div class="table100 ver1 m-b-110" style="padding-top: 60px">
+                                <div class="table100-head">
+                                    <table class="order">
+                                    <thead>
+                                    <tr class="row100 head bg-light">
+                                    <th class="cell100 column1 text-primary">Tuyến đường</th>
+                                    <th class="cell100 column2 text-primary">Collector</th>
+                                    <th class="cell100 column3 text-primary">Phương tiện</th>
                                     </tr>
-                                </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="janitortable col-2" style="display: none;">
-                <div class="bg-primary" style="border-radius: 10px; color: white; text-align: center; padding: 4px 2px;">
-                    Chưa phân công
-                </div>
-                <div id="blank2" class="container-table100" style="min-width: 270px">
-                    <div class="wrap-table100">
-                        <div class="table100 ver1 m-b-110">
-                            <div class="table100-head">
-                                <table class="border">
-                                </table>
+                                    </thead>
+                                    </table>
+                                    </div>
+                                    <div class="table100-body js-pscroll" style="max-height: 440px;">
+                                    <table id="tablemain">
+                                    <tbody id="tablemainbody">
+                                        <tr id="row1">
+                                            <td id="cell1" class="border" onclick="selectCell1(this)" style="cursor: pointer;"><br></td>
+                                            <td id="cell2" class="border" onclick ="setRouteColor(this)" style="cursor: pointer;"><br></td>
+                                            <td id="cell3" class="border" onclick ="setRouteColor(this)" style="cursor: pointer;"><br></td>
+                                            <td id="cell4" class="border" onclick="" style="cursor: pointer;">
+                                                <img src="../asset/img/trashbin.png" onclick="deleteRow(this)" style="margin-left: 16px;  max-width: 40%;"></img>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    </table>
                                 </div>
-                                <div class="table100-body js-pscroll">
-                                <table id="table0">
-                                <tbody id="table0body">
-                                <?php
-                                    for ($i = 1; $i <= 5; $i++) {
-                                        echo '
-                                        <tr class="row100 body">
-                                        <td class="cell100 column1">
-
-                                        </td>
-                                        </tr>';
-                                    }
-                                ?>
-                                </tbody>
-                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="area" class="container-table100" style="display: none; min-width: 270px">
-                    <div id="subarea" class="wrap-table100">
-                        <div class="table100 ver1 m-b-110">
-                            <div class="table100-head">
-                                <table class="border">
-                                </table>
-                                </div>
-                                <div class="table100-body js-pscroll">
-                                <table id="table4">
-                                <tbody id="table4body">
-                                <?php
-                                    while ($result2 = $data["area"]->fetch_assoc()) {
-                                        echo '
-                                        <tr class="row100 body">
-                                        <td class="cell100 column1">
-                                            <button idarea="'.$result2["id_area"].'" polygon="'.$result2["polygon"].'" title="'.$result2["location"].'=>'.$result2["list_MCP"].'" type="button" class="btn btn-primary" onclick="selected4(this)">
-                                            '.$result2["id_area"].'
-                                            </button>
-                                        </td>
-                                        </tr>';
-                                    }
-                                ?>
-                                </tbody>
-                                </table>
-                            </div>
-                        </div>
+                <div class="janitortable col-2" style="display: none;">
+                    <div class="bg-primary" style="border-radius: 10px; color: white; text-align: center; padding: 4px 2px;">
+                        Chưa phân công
                     </div>
-                </div>
-
-                <div id="janitor" class="container-table100" style="display: none; min-width: 270px">
-                    <div class="wrap-table100">
-                        <div class="table100 ver1 m-b-110">
-                            <div class="table100-head">
-                                <table class="border">
-                                </table>
-                                </div>
-                                <div class="table100-body js-pscroll">
-                                <table id="table5">
-                                <tbody id="table5body">
-                                <?php
-                                    while ($result2 = $data["employee2"]->fetch_assoc()) {
-                                        if ($result2["position"] == "janitor")
+                    <div id="blank2" class="container-table100" style="min-width: 270px">
+                        <div class="wrap-table100">
+                            <div class="table100 ver1 m-b-110">
+                                <div class="table100-head">
+                                    <table class="border">
+                                    </table>
+                                    </div>
+                                    <div class="table100-body js-pscroll">
+                                    <table id="table0">
+                                    <tbody id="table0body">
+                                    <?php
+                                        for ($i = 1; $i <= 5; $i++) {
                                             echo '
                                             <tr class="row100 body">
                                             <td class="cell100 column1">
-                                                <button type="button" class="btn btn-primary" onclick="selected5(this)">
-                                                '.$result2["name"].'
-                                                </button>
+
                                             </td>
                                             </tr>';
-                                    }
-                                ?>
-                                </tbody>
-                                </table>
+                                        }
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div id="vehicle" class="container-table100" style="display: none; min-width: 270px">
-                    <div class="wrap-table100">
-                        <div class="table100 ver1 m-b-110">
-                            <div class="table100-head">
-                                <table class="border">
-                                </table>
-                                </div>
-                                <div class="table100-body js-pscroll">
-                                <table id="table6">
-                                <tbody id="table6body">
-                                <?php
-                                    while ($result2 = $data["vehicle2"]->fetch_assoc()) {
-                                        if ($result2["type"] == "Troller")
+                    <div id="area" class="container-table100" style="display: none; min-width: 270px">
+                        <div id="subarea" class="wrap-table100">
+                            <div class="table100 ver1 m-b-110">
+                                <div class="table100-head">
+                                    <table class="border">
+                                    </table>
+                                    </div>
+                                    <div class="table100-body js-pscroll">
+                                    <table id="table4">
+                                    <tbody id="table4body">
+                                    <?php
+                                        while ($result2 = $data["area"]->fetch_assoc()) {
                                             echo '
                                             <tr class="row100 body">
                                             <td class="cell100 column1">
-                                                <button type="button" class="btn btn-primary" onclick="selected6(this)">
-                                                '.$result2["name"].'
+                                                <button idarea="'.$result2["id_area"].'" polygon="'.$result2["polygon"].'" title="'.$result2["location"].'=>'.$result2["list_MCP"].'" type="button" class="btn btn-primary" onclick="selected4(this)">
+                                                '.$result2["id_area"].'
                                                 </button>
                                             </td>
                                             </tr>';
-                                    }
-                                ?>
-                                </tbody>
-                                </table>
+                                        }
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="janitor" class="container-table100" style="display: none; min-width: 270px">
+                        <div class="wrap-table100">
+                            <div class="table100 ver1 m-b-110">
+                                <div class="table100-head">
+                                    <table class="border">
+                                    </table>
+                                    </div>
+                                    <div class="table100-body js-pscroll">
+                                    <table id="table5">
+                                    <tbody id="table5body">
+                                    <?php
+                                        while ($result2 = $data["employee2"]->fetch_assoc()) {
+                                            if ($result2["position"] == "janitor")
+                                                echo '
+                                                <tr class="row100 body">
+                                                <td class="cell100 column1">
+                                                    <button type="button" class="btn btn-primary" onclick="selected5(this)">
+                                                    '.$result2["name"].'
+                                                    </button>
+                                                </td>
+                                                </tr>';
+                                        }
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="vehicle" class="container-table100" style="display: none; min-width: 270px">
+                        <div class="wrap-table100">
+                            <div class="table100 ver1 m-b-110">
+                                <div class="table100-head">
+                                    <table class="border">
+                                    </table>
+                                    </div>
+                                    <div class="table100-body js-pscroll">
+                                    <table id="table6">
+                                    <tbody id="table6body">
+                                    <?php
+                                        while ($result2 = $data["vehicle2"]->fetch_assoc()) {
+                                            if ($result2["type"] == "Troller")
+                                                echo '
+                                                <tr class="row100 body">
+                                                <td class="cell100 column1">
+                                                    <button type="button" class="btn btn-primary" onclick="selected6(this)">
+                                                    '.$result2["name"].'
+                                                    </button>
+                                                </td>
+                                                </tr>';
+                                        }
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="janitortable col-6" style="display: none;">
-                <div class="bg-primary" style="border-radius: 10px; color: white; text-align: center; padding: 4px 2px; max-width: 650px;">
-                    Đã được phân công
-                </div>
-                <div class="container-table100">
-                    <div class="wrap-table100">
-                        <div class="table100 ver1 m-b-110" style="padding-top: 60px">
-                            <div class="table100-head">
-                                <table class="order">
-                                <thead>
-                                <tr class="row100 head bg-light">
-                                <th class="cell100 column1 text-primary">Khu vực</th>
-                                <th class="cell100 column2 text-primary">Janitor</th>
-                                <th class="cell100 column3 text-primary">Phương tiện</th>
-                                </tr>
-                                </thead>
-                                </table>
-                                </div>
-                                <div class="table100-body js-pscroll" style="max-height: 440px;">
-                                <table id="tablemain2">
-                                <tbody id="tablemainbody2">
-                                    <tr id="row1">
-                                        <td id="cell1" class="border" onclick="selectCell4(this)" style="cursor: pointer;"><br></td>
-                                        <td id="cell2" class="border" onclick ="setAreaColor(this)" style="cursor: pointer;"><br></td>
-                                        <td id="cell3" class="border" onclick ="setAreaColor(this)" style="cursor: pointer;"><br></td>
-                                        <td id="cell4" class="border" onclick="" style="cursor: pointer;">
-                                            <img src="../asset/img/trashbin.png" onclick="deleteRow2(this)" style="margin-left: 16px;  max-width: 40%;"></img>
-                                        </td>
+                <div class="janitortable col-6" style="display: none;">
+                    <div class="bg-primary" style="border-radius: 10px; color: white; text-align: center; padding: 4px 2px; max-width: 650px;">
+                        Đã được phân công
+                    </div>
+                    <div class="container-table100">
+                        <div class="wrap-table100">
+                            <div class="table100 ver1 m-b-110" style="padding-top: 60px">
+                                <div class="table100-head">
+                                    <table class="order">
+                                    <thead>
+                                    <tr class="row100 head bg-light">
+                                    <th class="cell100 column1 text-primary">Khu vực</th>
+                                    <th class="cell100 column2 text-primary">Janitor</th>
+                                    <th class="cell100 column3 text-primary">Phương tiện</th>
                                     </tr>
-                                </tbody>
-                                </table>
+                                    </thead>
+                                    </table>
+                                    </div>
+                                    <div class="table100-body js-pscroll" style="max-height: 440px;">
+                                    <table id="tablemain2">
+                                    <tbody id="tablemainbody2">
+                                        <tr id="row1">
+                                            <td id="cell1" class="border" onclick="selectCell4(this)" style="cursor: pointer;"><br></td>
+                                            <td id="cell2" class="border" onclick ="setAreaColor(this)" style="cursor: pointer;"><br></td>
+                                            <td id="cell3" class="border" onclick ="setAreaColor(this)" style="cursor: pointer;"><br></td>
+                                            <td id="cell4" class="border" onclick="" style="cursor: pointer;">
+                                                <img src="../asset/img/trashbin.png" onclick="deleteRow2(this)" style="margin-left: 16px;  max-width: 40%;"></img>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+        </div>
+        <div class="row" style="padding-top: 5px">
+            <div class="col-2">
+                <button type="button" class="btn btn-primary">
+                    <img src="../asset/img/arrowbutton.png" style="width: 20%; margin-left: -5px; margin-right: 10px;"></img>    
+                    Trở về
+                </button>
             </div>
-    </div>
-    <div class="row" style="padding-top: 5px">
-        <div class="col-2">
-            <button type="button" class="btn btn-primary">
-                <img src="../asset/img/arrowbutton.png" style="width: 20%; margin-left: -5px; margin-right: 10px;"></img>    
-                Trở về
-            </button>
+            <div class="col-7"></div>
+            <div class="col-3">
+                <button type="button" class="btn btn-light border border-primary" style="margin-right: 10px;">
+                    Xóa tất cả
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    Lưu
+                    <img src="../asset/img/savebutton.png" style="width: 25%; margin-left: 5px; margin-bottom: 4px;"></img>    
+                </button>
+            </div>
         </div>
-        <div class="col-7"></div>
-        <div class="col-3">
-            <button type="button" class="btn btn-light border border-primary" style="margin-right: 10px;">
-                Xóa tất cả
-            </button>
-            <button type="button" class="btn btn-primary">
-                Lưu
-                <img src="../asset/img/savebutton.png" style="width: 25%; margin-left: 5px; margin-bottom: 4px;"></img>    
-            </button>
-        </div>
-    </div>
+    </form>
 </div>
 
 <script>

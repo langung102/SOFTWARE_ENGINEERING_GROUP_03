@@ -11,7 +11,7 @@
                 if (isset($data["fail_login"]) && $data["fail_login"] == 1) 
                     echo <<< _END
                         <div class="login-fail d-flex mx-5 mt-4 py-2 px-2">
-                            <img class="px-3" src="../asset/img/alarm.png" alt="alarm" style="width:15%;"> 
+                            <img class="px-3" src="../asset/img/alarm.png" alt="alarm" style="width:80px;"> 
                             <h6 class="mt-3"style="color:red;">Tên đăng nhập hoặc mật khẩu chưa chính xác !</h6>
                         </div>
                     _END;
@@ -27,7 +27,7 @@
                     <input type="password" class="form-control" name="password" id="InputPassword1" required>
                 </div>
                 <div class="row mt-4">
-                    <div class="col my-3 pe-5 form-check">
+                    <div class="col my-3 form-check">
                         <input type="checkbox" class="form-check-input" id="Check1">
                         <label class="form-check-label" for="Check1">Tự động đăng nhập</label>
                     </div>
