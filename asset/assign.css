@@ -10,6 +10,10 @@
 
 #map { height: 545px; }
 
+#cell1, #cell2, #cell3 {
+    text-align: center;
+}
+
 @font-face {
     font-family: Lato-Regular;
     src: url(../fonts/Lato/Lato-Regular.ttf)
