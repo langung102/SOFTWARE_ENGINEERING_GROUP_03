@@ -5,10 +5,14 @@ class task extends Controller {
             $route = $this->model("routeModel");
             $employee = $this->model("employeeModel");
             $vehicle = $this->model("vehicleModel");
+            $area = $this->model("areaModel");
             $allRoute = $route->getAllRoute();
             $allEmployee = $employee->getAllEmployee();
             $allVehicle = $vehicle->Vehicle();
-            $this->view("taskAssign", ["route" => $allRoute, "employee" => $allEmployee, "vehicle" => $allVehicle]);
+            $allEmployee2 = $employee->getAllEmployee();
+            $allVehicle2 = $vehicle->Vehicle();
+            $allArea = $area->getAllArea();
+            $this->view("taskAssign", ["route" => $allRoute, "area" => $allArea, "employee" => $allEmployee, "vehicle" => $allVehicle, "employee2" => $allEmployee2, "vehicle2" => $allVehicle2]);
         }
         else $this->view("page404");
     }
