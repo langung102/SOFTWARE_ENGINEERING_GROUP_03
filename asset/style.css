@@ -1,9 +1,9 @@
 body {
     background-color: #D9FFFF;
 }
-
-#login-page {
-    height: 100vh;
+.page-body{
+    min-height: 100vh;
+    position: relative;
 }
 .login-box {
     background: #FFFFFF;
@@ -13,4 +13,21 @@ body {
 
 .login-form {
     width : 70%;
+}
+
+.login-fail {
+    box-sizing: border-box;
+    background: #F5F5F5;
+    border: 1px solid #EB0000;
+}
+.left-bar {
+    position: absolute;
+    top: 0;
+    left: -25px;
+    bottom: 0;
+}
+
+
+.text-nowrap {
+    white-space: nowrap;
 }

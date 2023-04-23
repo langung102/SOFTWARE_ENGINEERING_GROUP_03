@@ -1,14 +1,23 @@
 <?php
     require_once("header.php");
 ?>
-<div class="container mt-sm-4" >
-    <div class="row d-flex justify-content-center align-items-center g-0 " id="login-page">
+<div class="container mt-sm-4 page-body" >
+    <div class="row d-flex justify-content-center align-items-center g-0 page-body">
         <div class="col-md-6">
             <img src="../asset/img/login.png" class="img-fluid rounded-start ms-5" alt="..." width="60%">
         </div>
         <div class="col-md-6 login-box">
+            <?php
+                if (isset($data["fail_login"]) && $data["fail_login"] == 1) 
+                    echo <<< _END
+                        <div class="login-fail d-flex mx-5 mt-4 py-2 px-2">
+                            <img class="px-3" src="../asset/img/alarm.png" alt="alarm" style="width:15%;"> 
+                            <h6 class="mt-3"style="color:red;">Tên đăng nhập hoặc mật khẩu chưa chính xác !</h6>
+                        </div>
+                    _END;
+            ?>
             <form action="/user/login" method="POST" class="container py-5 login-form">
-                <h2 class="mt-4 text-center">ĐĂNG NHẬP</h2>
+                <h2 class="mt-3 text-center">ĐĂNG NHẬP</h2>
                 <div class="my-4">
                     <label for="AccountInput" class="form-label">Tên đăng nhập</label>
                     <input type="text" class="form-control" id="AccountInput" name="username" aria-describedby="emailHelp" required>
@@ -23,12 +32,6 @@
                         <label class="form-check-label" for="Check1">Tự động đăng nhập</label>
                     </div>
                     <button type="submit" class=" col btn btn-primary ms-5">Đăng nhập</button>
-                </div>
-                <div class="mt-4 text-danger">
-                    <?php
-                        if (isset($data["fail_login_msg"])) echo $data["fail_login_msg"];
-                        else echo "";
-                    ?>
                 </div>
             </form>
         </div>
