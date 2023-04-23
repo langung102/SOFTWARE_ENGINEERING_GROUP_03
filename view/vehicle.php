@@ -20,7 +20,7 @@
 				</label>
 			</div>
         <!-- table -->
-        <table class="table table-success table-striped table-info mt-3 fs-6">
+        <table class="table table-success table-striped mt-3 fs-6">
             <thead>
                 <tr class="fw-bold">
                     <th scope="col" style="width:10%">Mã số</th>
