@@ -1,4 +1,5 @@
 <?php
+    // echo $data["dataAssignTask"];
     require_once("header.php");
 ?>
 
@@ -53,15 +54,18 @@
                 </tr>
             </thead>
             <tbody>
-                <?php  
-                    foreach ($data['result'] as $val) {
-                        echo "<tr><td></td><td>".$val['id_task']."</td>".
-                        "<td>".$val['id_employee']."</td>".
-                        "<td>".$val['assigned_area']."</td>".
-                        "<td>".$val['assigned_troller']."</td>".
-                        "<td>".$val['assigned_route']."</td>".
-                        "<td>".$val['assigned_vehicle']."</td></tr>"; 
+                <?php
+                    if (isset($data['result'])) {
+                        foreach ($data['result'] as $val) {
+                            echo "<tr><td></td><td>".$val['id_task']."</td>".
+                            "<td>".$val['id_employee']."</td>".
+                            "<td>".$val['assigned_area']."</td>".
+                            "<td>".$val['assigned_troller']."</td>".
+                            "<td>".$val['assigned_route']."</td>".
+                            "<td>".$val['assigned_vehicle']."</td></tr>"; 
+                        }
                     }
+                    else echo "<p class='text-center fs-6 fst-italic'>".$data['msg']."</p>";
                 ?>  
             </tbody>
         </table>
