@@ -10,6 +10,7 @@
       <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
       <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
       <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
       <link rel="stylesheet" href="../asset/style.css">
       <link rel="stylesheet" href="../asset/switch.css">
       <link rel="stylesheet" href="../asset/assign.css">

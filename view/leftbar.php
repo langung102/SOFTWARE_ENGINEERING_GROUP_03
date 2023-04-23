@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-<div class="flex-shrink-0 my-3 px-4 py-4 bg-white text-dark bg-opacity-50" 
-    style="width: calc(250px + 15%); box-sizing: border-box;">
-=======
-<div class=" left-bar flex-shrink-0 px-5 pt-3 bg-white text-dark" style="box-sizing: border-box;">
->>>>>>> main
+<div class="left-bar flex-shrink-0 my-3 px-5 pt-3 bg-white text-dark" style="box-sizing: border-box;">
     <ul class="list-unstyled ps-0">
         <li class="nav-item fs-6 fw-bold text-primary">
             <a class="nav-link py-4" href="#">
@@ -23,15 +18,9 @@
                 Nhắn tin
             </a>
         </li>
-<<<<<<< HEAD
-        <li class="nav-item fs-5 fw-bold text-primary">
-            <a class="nav-link py-4" href="./calendar">
-                <img src="../asset/img/leftbar4.png" style="margin-right: 15px;" alt="" height="40px" width="40px">
-=======
         <li class="nav-item fs-6 fw-bold text-primary">
-            <a class="nav-link py-4" href="#">
+            <a class="nav-link py-4" href="/calendar/viewlistInfo">
                 <img src="../asset/img/leftbar4.png" style="margin-right: 15px;" alt="" width="30px">
->>>>>>> main
                 Lịch làm việc
             </a>
         </li>
