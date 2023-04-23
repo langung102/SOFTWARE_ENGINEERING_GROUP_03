@@ -9,12 +9,12 @@
         {
             $arr = $this->UrlProcess();
             if (isset($arr[0])){
-                if (file_exists("./controller/". $arr[0] ."Controller.php")){
+                if (file_exists("./controller/". $arr[0] .".php")){
                     $this->controller = $arr[0];
                     unset($arr[0]);
                 }
             }            
-            require_once "./controller/" . $this->controller . "Controller.php";
+            require_once "./controller/" . $this->controller . ".php";
             
             $this->controller = new $this->controller; //create new obj
             if (isset($arr[1]) && method_exists($this->controller, $arr[1])) {

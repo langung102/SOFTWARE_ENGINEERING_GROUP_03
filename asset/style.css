@@ -14,3 +14,11 @@ body {
 .login-form {
     width : 70%;
 }
+
+.dau {
+    float: left;
+}
+
+.cuoi {
+    float: right;
+}
