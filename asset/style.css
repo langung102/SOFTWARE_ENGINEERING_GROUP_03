@@ -31,8 +31,3 @@ body {
 .text-nowrap {
     white-space: nowrap;
 }
-
-option {
-    height: 10px; 
-    overflow: auto;
-}

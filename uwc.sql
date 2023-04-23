@@ -101,6 +101,16 @@ INSERT INTO `employee` (`id`, `name`, `address`, `mail`, `phone_number`, `positi
 (20000, 'Dang Van A', 'Thủ Đức, Hồ Chí Minh City', 'dangvana@gmail.com', '0912345678', 'janitor', 'male', 'dangvana', '1234556789', 0),
 (20001, 'Back Officer', 'DHBK TPHCM', 'backofficer@gmail.com', '0988888888', 'backofficer', 'male', 'backofficer', '123456', 0);
 
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`id`, `name`, `address`, `mail`, `phone_number`, `position`, `gender`, `user_name`, `password`) VALUES
+(10000, 'Nguyen Van A', 'Thủ Đức, Hồ Chí Minh City', 'nguyenvana@gmail.com', '0912345678', 'collector', 'male', 'nguyenvana', '1234556789'),
+(10001, 'Nguyen Van B', 'Quận 2, Hồ Chí Minh City', 'nguyenvanb@gmail.com', '0912345678', 'collector', 'male', 'nguyenvanb', '1234556789'),
+(10002, 'Nguyen Van C', 'Quận 2, Hồ Chí Minh City', 'nguyenvanc@gmail.com', '0912345678', 'collector', 'male', 'nguyenvanc', '1234556789'),
+(20000, 'Dang Van A', 'Thủ Đức, Hồ Chí Minh City', 'dangvana@gmail.com', '0912345678', 'janitor', 'male', 'dangvana', '1234556789');
+
 -- --------------------------------------------------------
 
 --
@@ -150,6 +160,7 @@ CREATE TABLE `route` (
   `state` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
 --
 -- Dumping data for table `route`
 --
@@ -164,6 +175,7 @@ INSERT INTO `route` (`id_route`, `way`, `waypoint`, `state`) VALUES
 (7, 'Công Ty Xử Lý Chất Thải Công Nghiệp & Môi Trường Thái An -> Đường Vườn Lài -> Nguyễn Thái Sơn -> Bãi rác Phú Nhuận', '[L.latLng(10.840859077354168, 106.69524804835847),\r\nL.latLng(10.80885499246943, 106.67674127040907)]\r\n', 0),
 (8, 'Công Ty Xử Lý Chất Thải Công Nghiệp & Môi Trường Thái An -> Quốc lộ 1 -> Nguyễn Thị Kiểu -> Bãi rác Phường Hiệp Thành', '[L.latLng(10.840859077354168, 106.69524804835847),\r\nL.latLng(10.873237725641323, 106.63553054414089)]', 0),
 (9, 'Công Ty Xử Lý Chất Thải Công Nghiệp & Môi Trường Thái An -> Đường Vườn Lài -> Đường Quang Trung -> Bãi rác gần Phạm Văn Chiêu', '[L.latLng(10.840859077354168, 106.69524804835847),\r\nL.latLng(10.851631888835035, 106.64938937803355)]', 0);
+
 
 -- --------------------------------------------------------
 
@@ -193,6 +205,7 @@ INSERT INTO `task` (`id_task`, `description`, `id_employee`, `assigned_area`, `a
 (1, 'aa', 2010444, 'Thủ Đức', 'T1', 'Tạ Quang Bửu', '62-F1 05678', 1, 0, 0, 0),
 (2, 'aa', 2010444, 'Thủ Đức', 'T1', 'Tạ Quang Bửu', '62-F1 05678', 0, 0, 0, 0),
 (3, 'aa', 2010444, 'Thủ Đức', 'T1', 'Tạ Quang Bửu', '62-F1 05678', 2, 0, 0, 0);
+
 
 -- --------------------------------------------------------
 

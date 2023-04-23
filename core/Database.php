@@ -4,7 +4,7 @@
         private $server = 'localhost';
         private $dbName = 'uwc';
         private $user = 'root';
-        private $password = '';
+        private $password = '02082002';
 
         public function __construct() {
             $this->connect();
