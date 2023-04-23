@@ -383,14 +383,14 @@
         </div>
         <div class="row" style="padding-top: 5px">
             <div class="col-2">
-                <button type="button" class="btn btn-primary">
+                <a type="button" class="btn btn-primary" href="/task/manage">
                     <img src="../asset/img/arrowbutton.png" style="width: 20%; margin-left: -5px; margin-right: 10px;"></img>    
                     Trở về
-                </button>
+                </a> 
             </div>
             <div class="col-7"></div>
             <div class="col-3">
-                <button type="button" class="btn btn-light border border-primary" style="margin-right: 10px;">
+                <button type="button" class="btn btn-light border border-primary" onclick="deleteAllRow()" style="margin-right: 10px;">
                     Xóa tất cả
                 </button>
                 <button type="submit" class="btn btn-primary">
@@ -410,7 +410,7 @@
     var lastButton;
     var flagDelete = 0;
     var lastRow = null;
-    var curState = 0;
+    var curState = false;
     const lastRoute = new Array(100).fill(null);
 
     var curRow2 = null;
@@ -449,6 +449,22 @@
     //     ],
     //     routeWhileDragging: true
     // }).addTo(map);
+
+    function deleteAllRow() {
+        if (curState == false) {
+            var tableRows = document.querySelectorAll("#tablemainbody tr");
+            for (let i = 0; i < tableRows.length; i++) {
+                var imgTag = tableRows[i].querySelector("img");
+                deleteRow(imgTag);
+            }
+        } else {
+            var tableRows = document.querySelectorAll("#tablemainbody2 tr");
+            for (let i = 0; i < tableRows.length; i++) {
+                var imgTag = tableRows[i].querySelector("img");
+                deleteRow2(imgTag);
+            }
+        }
+    }
 
     function updateState(checkbox) {
         curState = checkbox.checked;
