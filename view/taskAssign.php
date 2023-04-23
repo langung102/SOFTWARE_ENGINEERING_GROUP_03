@@ -381,10 +381,10 @@
         </div>
         <div class="row" style="padding-top: 5px">
             <div class="col-2">
-                <button type="button" class="btn btn-primary">
+                <a type="button" class="btn btn-primary" href="/task/manage">
                     <img src="../asset/img/arrowbutton.png" style="width: 20%; margin-left: -5px; margin-right: 10px;"></img>    
                     Trở về
-                </button>
+                </a> 
             </div>
             <div class="col-7"></div>
             <div class="col-3">
