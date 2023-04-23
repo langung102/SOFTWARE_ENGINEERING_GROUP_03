@@ -8,23 +8,58 @@
         ?>
     </div>
     <div class="d-flex flex-column mb-3 col-8 my-5 me-5 ">
-    <div class="d-flex flex-grow-1 align-items-end justify-content-end">
-    <div class="p-2 dropdown">
-                <button class="btn btn-secondary dropdown-toggle bg-light text-black border-primary 
-                btn-lg align-items-end justify-content-end" type="button" data-bs-toggle="dropdown" 
-                aria-expanded="false" style="width:150px;">
-                    Khu vực 1
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Khu vực hai</a></li>
-                    <li><a class="dropdown-item" href="#">Khu vực ba</a></li>
-                    <li><a class="dropdown-item" href="#">Khu vực tư</a></li>
-                    <li><a class="dropdown-item" href="#">Khu vực khác</a></li>
-                </ul>
+    <div class="align-items-end justify-content-end">
+    <div class="p-2">
+        <form method="POST" id="filterAreaform" action="/mcp/viewMCP">
+        <div class="row">
+                <div class ="col-3">
+
+                <select  name="filter_area" class="form-select" aria-label="Default select example" id="filter_area">
+                        <option <?php 
+                            if(isset($_POST['filter_area'])){
+                                if(intval($_POST['filter_area']) == 0){
+                                    echo"selected=selected";
+                                }
+                            } 
+                    ?> value="0" >Tất cả khu vực</option>
+                        <option value="1"  <?php 
+                            if(isset($_POST['filter_area'])){
+                                if(intval($_POST['filter_area']) == 1){
+                                    echo"selected=selected";
+                                }
+                            } 
+                    ?> >Khu vực 1</option>
+                        <option value="2"  <?php 
+                            if(isset($_POST['filter_area'])){
+                                if(intval($_POST['filter_area']) == 2){
+                                    echo"selected=selected";
+                                }
+                            } 
+                    ?> >Khu vực 2</option>
+                        <option value="3"  <?php 
+                            if(isset($_POST['filter_area'])){
+                                if(intval($_POST['filter_area']) == 3){
+                                    echo"selected=selected";
+                                }
+                            } 
+                    ?> >Khu vực 3</option>
+                        <option value="4"  <?php 
+                            if(isset($_POST['filter_area'])){
+                                if(intval($_POST['filter_area']) == 4){
+                                    echo"selected=selected";
+                                }
+                            } 
+                    ?> >Khu vực 4</option>
+                     
+                </select>
+                <button type="submit" class="btn btn-danger" style="display:none"></button>
+                </div>
             </div>
+        </form>
+        </div>
     </div>
         <!-- table -->
-        <table class="table table-success table-striped mt-3 fs-6">
+        <table class="table table-success table-striped table-info mt-3 fs-6">
             <thead>
                 <tr class="fw-bold">
                     <th scope="col" style="width:10%">Mã số</th>
@@ -35,7 +70,11 @@
             </thead>
             <tbody>
             <?php 
+            // if(isset($_POST['filter_area'])){
+            //     echo "yes";
+            // }
             $result = $data["datamcp"];
+
             while($row = $result->FETCH_ASSOC()){
                 $str="<tr >
                 <td>".$row["id_mcp"]."</td>
@@ -66,6 +105,13 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#filter_area").change(function() {    
+            $("#filterAreaform").submit();
+        });
+    });
+</script>
 <?php 
     require_once("footer.php");
 ?>

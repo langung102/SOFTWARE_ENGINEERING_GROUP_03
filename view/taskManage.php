@@ -10,64 +10,73 @@
     </div>
     <div class="d-flex flex-column mb-3 col-8 my-5 ">
         <!-- filter -->
-        <div class="d-flex">
-            <div class="p-2 dropdown">
-                <button class="btn btn-secondary dropdown-toggle bg-light text-black border-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:150px;">
-                    Tuần 
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+        <form method="POST" id="filterTask" action="/task/manage">
+            <div class="d-flex">
+                <div class="p-2">
+                    <select class="form-select" name="state" id="state" required>
+                        <option <?php if ($data['state'] == -1) echo "selected=selected"?> value="">Trạng thái</option>
+                        <option <?php if ($data['state'] == 0) echo "selected=selected"?> value="0">Chưa hoàn thành</option>
+                        <option <?php if ($data['state'] == 1) echo "selected=selected"?> value="1">Đang hoàn thành</option>
+                        <option <?php if ($data['state'] == 2) echo "selected=selected"?> value="2">Đã hoàn thành</option>
+                    </select>
+                </div>           
+                <div class="p-2 flex-grow-1">
+                    <div class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-primary" type="button">
+                            <img src="../asset/img/search.png" alt="" width="20px">
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="p-2 dropdown">
-                <button class="btn btn-secondary dropdown-toggle bg-light text-black border-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:150px;">
-                    Mã số 
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>            
-            <div class="p-2 flex-grow-1">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-primary" type="submit">
-                        <img src="../asset/img/search.png" alt="" width="20px">
-                    </button>
-                </form>
-            </div>
-        </div>
-        <table class="table table-responsive table-responsive-sm">
+        </form>
+        <table class="table table-bordered border-primary table-striped mt-3">
             <thead>
                 <tr class="fw-bold">
-                    <th scope="row">Tuần</th>
-                    <th scope="row">Mã số</th>
-                    <th scope="row">Tên</th>
-                    <th scope="row">Khu vực</th>
-                    <th scope="row">Troller</th>
-                    <th scope="row">Route</th>
-                    <th scope="row">Vehicle</th>
+                    <th class="text-center" scope="row" width="10%">Tuần</th>
+                    <th class="text-center" scope="row" width="10%">Mã số</th>
+                    <th class="text-center" scope="row" width="20%">Tên nhân viên</th>
+                    <th class="text-center" scope="row" width="10%">Khu vực</th>
+                    <th class="text-center" scope="row" width="10%">Troller</th>
+                    <th class="text-center" scope="row" width="10%">Route</th>
+                    <th class="text-center" scope="row" width="13%">Vehicle</th>
+                    <th class="text-center" scope="row" width="10%">Trạng thái</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                    if (isset($data['result'])) {
-                        foreach ($data['result'] as $val) {
-                            echo "<tr><td></td><td>".$val['id_task']."</td>".
-                            "<td>".$val['id_employee']."</td>".
+                    if (isset($data['result']) && isset($data['name'])) {
+                        foreach ($data['result'] as $key => $val) {
+                            $x=$val['state'];
+                            $work = ($x==0)?"../asset/img/delete.png":(($x==1)?"../asset/img/clock.png":"../asset/img/work-in-progress.png");
+                            echo "<tr><td>".$val['week']."</td><td>".$val['id_task']."</td>".
+                            "<td>".$data['name'][$key]."</td>".
                             "<td>".$val['assigned_area']."</td>".
                             "<td>".$val['assigned_troller']."</td>".
                             "<td>".$val['assigned_route']."</td>".
-                            "<td>".$val['assigned_vehicle']."</td></tr>"; 
+                            "<td>".$val['assigned_vehicle']."</td>".
+                            "<td class='text-center'><img src=$work style='width:auto; height:20px;'></td>
+                            </tr>"; 
                         }
                     }
                     else echo "<p class='text-center fs-6 fst-italic'>".$data['msg']."</p>";
                 ?>  
             </tbody>
         </table>
+        <div class="container">
+            <div class="d-flex flex-row mb-3">
+                <div class="p-2" style="width:50px; height:25px"> <img src= "../asset/img/delete.png" style="width:auto; height:20px;"></div>
+                <div class="d-flex align-items-center p-2">Chưa hoàn thành</div>
+            </div>
+            <div class="d-flex flex-row mb-3">
+                <div class="p-2" style="width:50px; height:25px"> <img src= "../asset/img/clock.png" style="width:auto; height:20px;"></div>
+                <div class="d-flex align-items-center p-2">Đang hoàn thành</div>
+            </div>
+            <div class="d-flex flex-row mb-3">
+                <div class="p-2" style="width:50px; height:25px"> <img src= "../asset/img/work-in-progress.png" style="width:auto; height:20px;"></div>
+                <div class="d-flex align-items-center p-2">Đã hoàn thành</div>
+            </div>
+        </div>
 
         <!-- add task -->
         <div class="d-flex flex-grow-1 align-items-end justify-content-end">
@@ -79,7 +88,13 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#state").change(function() {    
+            $("#filterTask").submit();
+        });
+    });
+</script>
 <?php
     require_once("footer.php");
 ?>
