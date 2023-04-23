@@ -1,13 +1,13 @@
 <div class=" left-bar flex-shrink-0 px-5 pt-3 bg-white text-dark" style="box-sizing: border-box;">
     <ul class="list-unstyled ps-0">
         <li class="nav-item fs-6 fw-bold text-primary">
-            <a class="nav-link py-4" href="#">
+            <a class="nav-link py-4" href="/bang/mainpage">
                 <img src="../asset/img/leftbar1.png" style="margin-right: 15px;" alt="" width="30px">
                 Bảng điều khiển
             </a>
         </li>
         <li class="nav-item fs-6 fw-bold text-primary">
-            <a class="nav-link py-4" href="/task/manage">
+            <a class="nav-link py-4" href="/task/Manage">
                 <img src="../asset/img/leftbar2.png" style="margin-right: 15px;" alt="" width="30px">
                 Quản lý công việc
             </a>
@@ -25,13 +25,13 @@
             </a>
         </li>
         <li class="nav-item fs-6 fw-bold text-primary">
-            <a class="nav-link py-4" href="#">
+            <a class="nav-link py-4" href="/mcp/viewMCP">
                 <img src="../asset/img/leftbar5.png" style="margin-right: 15px;" alt="" width="30px">
                 Xem MCP
             </a>
         </li>
         <li class="nav-item fs-6 fw-bold text-primary">
-            <a class="nav-link py-4" href="#">
+            <a class="nav-link py-4" href="/vehicle/viewVehicle">
                 <img src="../asset/img/leftbar6.png" style="margin-right: 15px;" alt="" width="30px">
                 Xem phương tiện
             </a>

@@ -7,8 +7,9 @@
         }
         function viewVehicle(){
             $data = $this->vehicle->Vehicle();
+            $data2 = $this->vehicle->Vehicle();
             // echo $data;
-            $this->view("vehicle", $data=["dataVehicle"=>$data]);
+            $this->view("vehicle", ["dataVehicle"=>$data,"dataVehicle2"=>$data2]);
         }
     }
 ?>

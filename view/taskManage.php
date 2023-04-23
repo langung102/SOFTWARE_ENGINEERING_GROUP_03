@@ -71,7 +71,7 @@
         </table>
 
         <!-- add task -->
-        <div class="d-flex flex-grow-1 align-items-end justify-content-end">
+        <div class="d-flex flex-grow-1 align-items-end justify-content-end" style="margin-bottom: 90px;">
             <a href="/task/assign">
                 <button type="button" class="btn btn-primary rounded-circle p-3 mb-2">
                     <img src="../asset/img/add_task.png" alt="" width="50px">
