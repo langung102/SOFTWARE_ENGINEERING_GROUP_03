@@ -3,6 +3,8 @@
 ?>
 
 <div class="assign container-fluid rounded my-3">
+    <p class='text-center fs-6 fst-italic text-success'><?php echo $data['msgCollector'];?></p>
+    <p class='text-center fs-6 fst-italic text-success'><?php echo $data['msgJanitor'];?></p>
     <form  method="POST">
         <div class="row">
             <div class="switch6 bg-primary" style="border:1px solid #999999;">

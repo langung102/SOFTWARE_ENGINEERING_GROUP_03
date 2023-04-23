@@ -8,7 +8,7 @@
             }
         }
         function freeVehicle(){
-            $sql = "SELECT * FROM vehicle WHERE state = 0";
+            $sql = "SELECT * FROM vehicle WHERE `state` = 0";
             $result = $this->conn->query($sql);
             if($result && $result->num_rows > 0){
                 return $result;
