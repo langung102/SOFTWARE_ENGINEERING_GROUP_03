@@ -1,5 +1,10 @@
 <?php
 class task extends Controller {
+    
+    private $taskAssign;
+    public function __construct(){
+        $this->taskAssign = $this->model('taskModel');
+    }
     function assign() {
         if (isset($_SESSION['position']) && $_SESSION['position'] == 'backofficer') {
             $route = $this->model("routeModel");
@@ -18,6 +23,7 @@ class task extends Controller {
     }
     
     function manage() {
+
         if (isset($_SESSION['position']) && $_SESSION['position'] == 'backofficer') {
             $show = $this->model('taskModel');
             $result = $show->getAllTask();
