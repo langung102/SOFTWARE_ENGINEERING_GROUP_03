@@ -138,11 +138,11 @@
                     <th scope="row">Mô tả</th>
                     <?php 
                         if ($positionn === 'janitor') {
-                            echo "<th scope='row'>Khu vực</th>
+                            echo "<th scope='row'>Mã khu vực</th>
                             <th scope='row'>Troller</th>";
                         }
                         else if ($positionn === 'collector') {
-                            echo "<th scope='row'>Tuyến đường</th>
+                            echo "<th scope='row'>Mã tuyến đường</th>
                             <th scope='row'>Vehicle</th>";
                         }
                     ?> 

@@ -3,27 +3,27 @@
     class mainpageModel extends Database {
         # Lấy số lượng
         function CollectorsWork() {
-            $qr = "SELECT * FROM task WHERE id_employee LIKE '1%' AND `state` = 1";
+            $qr = "SELECT * FROM task WHERE id_employee LIKE '1%'";
             return mysqli_query($this->conn, $qr);
         }
         function JanitorsWork() {
-            $qr = "SELECT * FROM task WHERE id_employee LIKE '2%' AND `state` = 1";
+            $qr = "SELECT * FROM task WHERE id_employee LIKE '2%'";
             return mysqli_query($this->conn, $qr);
         }
         function VehiclesWork() {
-            $qr = "SELECT * FROM task WHERE id_employee LIKE '1%' AND `state` = 1";
+            $qr = "SELECT * FROM task WHERE id_employee LIKE '1%'";
             return mysqli_query($this->conn, $qr);
         }
         function TrollersWork() {
-            $qr = "SELECT * FROM task WHERE id_employee LIKE '2%' AND `state` = 1";
+            $qr = "SELECT * FROM task WHERE id_employee LIKE '2%'";
             return mysqli_query($this->conn, $qr);
         }
         function AreasWork() {
-            $qr = "SELECT DISTINCT assigned_area FROM task";
+            $qr = "SELECT DISTINCT assigned_area FROM task WHERE assigned_area <> '' ORDER BY assigned_area ASC";
             return mysqli_query($this->conn, $qr);
         }
         function RoutesWork() {
-            $qr = "SELECT assigned_route FROM task";
+            $qr = "SELECT assigned_route FROM task WHERE assigned_route <> '' ORDER BY assigned_route ASC";
             return mysqli_query($this->conn, $qr);
         }
         # Lấy Tổng
