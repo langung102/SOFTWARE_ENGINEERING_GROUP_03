@@ -2,7 +2,7 @@
     require_once("header.php");
 ?>
 <div class="container mt-sm-4 page-body" >
-    <div class="row d-flex justify-content-center align-items-center g-0 page-body">
+    <div class="row d-flex justify-content-center align-items-center g-0 page-body" style="top: -90px">
         <div class="col-md-6">
             <img src="../asset/img/login.png" class="img-fluid rounded-start ms-5" alt="..." width="60%">
         </div>
